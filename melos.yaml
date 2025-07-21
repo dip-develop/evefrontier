@@ -1,0 +1,10 @@
+name: evefrontier
+resolution: workspace
+
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+  generate:
+    run: melos exec -c 1 --depends-on build_runner -- dart run build_runner build -d

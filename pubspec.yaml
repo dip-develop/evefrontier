@@ -1,0 +1,10 @@
+name: evefrontier
+publish_to: none
+environment:
+  sdk: ^3.6.0
+  
+workspace:
+  - packages/api
+
+dev_dependencies:
+  melos: ^6.3.2
