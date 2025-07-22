@@ -30,7 +30,7 @@ class _$GateLinkModuleEntitySerializer
       'gatesInRange',
       serializers.serialize(object.gatesInRange,
           specifiedType: const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)])),
+              BuiltList, const [const FullType(SmartAssemblyEntity)])),
       'isLinked',
       serializers.serialize(object.isLinked,
           specifiedType: const FullType(bool)),
@@ -57,9 +57,9 @@ class _$GateLinkModuleEntitySerializer
           break;
         case 'gatesInRange':
           result.gatesInRange.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(SimpleSmartAssemblyEntity)
-              ]))! as BuiltList<Object?>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SmartAssemblyEntity)]))!
+              as BuiltList<Object?>);
           break;
         case 'isLinked':
           result.isLinked = serializers.deserialize(value,
@@ -76,7 +76,7 @@ class _$GateLinkModuleEntity extends GateLinkModuleEntity {
   @override
   final String destinationGate;
   @override
-  final BuiltList<SimpleSmartAssemblyEntity> gatesInRange;
+  final BuiltList<SmartAssemblyEntity> gatesInRange;
   @override
   final bool isLinked;
 
@@ -136,10 +136,10 @@ class GateLinkModuleEntityBuilder
   set destinationGate(String? destinationGate) =>
       _$this._destinationGate = destinationGate;
 
-  ListBuilder<SimpleSmartAssemblyEntity>? _gatesInRange;
-  ListBuilder<SimpleSmartAssemblyEntity> get gatesInRange =>
-      _$this._gatesInRange ??= ListBuilder<SimpleSmartAssemblyEntity>();
-  set gatesInRange(ListBuilder<SimpleSmartAssemblyEntity>? gatesInRange) =>
+  ListBuilder<SmartAssemblyEntity>? _gatesInRange;
+  ListBuilder<SmartAssemblyEntity> get gatesInRange =>
+      _$this._gatesInRange ??= ListBuilder<SmartAssemblyEntity>();
+  set gatesInRange(ListBuilder<SmartAssemblyEntity>? gatesInRange) =>
       _$this._gatesInRange = gatesInRange;
 
   bool? _isLinked;

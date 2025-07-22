@@ -1,25 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'character_entity.dart';
+part of 'smart_character_entity.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<CharacterEntity> _$characterEntitySerializer =
-    _$CharacterEntitySerializer();
+Serializer<SmartCharacterEntity> _$smartCharacterEntitySerializer =
+    _$SmartCharacterEntitySerializer();
 
-class _$CharacterEntitySerializer
-    implements StructuredSerializer<CharacterEntity> {
+class _$SmartCharacterEntitySerializer
+    implements StructuredSerializer<SmartCharacterEntity> {
   @override
-  final Iterable<Type> types = const [CharacterEntity, _$CharacterEntity];
+  final Iterable<Type> types = const [
+    SmartCharacterEntity,
+    _$SmartCharacterEntity
+  ];
   @override
-  final String wireName = 'CharacterEntity';
+  final String wireName = 'SmartCharacterEntity';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, CharacterEntity object,
+  Iterable<Object?> serialize(
+      Serializers serializers, SmartCharacterEntity object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(String)),
       'address',
       serializers.serialize(object.address,
           specifiedType: const FullType(String)),
@@ -31,10 +37,10 @@ class _$CharacterEntitySerializer
   }
 
   @override
-  CharacterEntity deserialize(
+  SmartCharacterEntity deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = CharacterEntityBuilder();
+    final result = SmartCharacterEntityBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -42,6 +48,10 @@ class _$CharacterEntitySerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
         case 'address':
           result.address = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
@@ -57,27 +67,35 @@ class _$CharacterEntitySerializer
   }
 }
 
-class _$CharacterEntity extends CharacterEntity {
+class _$SmartCharacterEntity extends SmartCharacterEntity {
+  @override
+  final String id;
   @override
   final String address;
   @override
   final String name;
 
-  factory _$CharacterEntity([void Function(CharacterEntityBuilder)? updates]) =>
-      (CharacterEntityBuilder()..update(updates))._build();
+  factory _$SmartCharacterEntity(
+          [void Function(SmartCharacterEntityBuilder)? updates]) =>
+      (SmartCharacterEntityBuilder()..update(updates))._build();
 
-  _$CharacterEntity._({required this.address, required this.name}) : super._();
+  _$SmartCharacterEntity._(
+      {required this.id, required this.address, required this.name})
+      : super._();
   @override
-  CharacterEntity rebuild(void Function(CharacterEntityBuilder) updates) =>
+  SmartCharacterEntity rebuild(
+          void Function(SmartCharacterEntityBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  CharacterEntityBuilder toBuilder() => CharacterEntityBuilder()..replace(this);
+  SmartCharacterEntityBuilder toBuilder() =>
+      SmartCharacterEntityBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is CharacterEntity &&
+    return other is SmartCharacterEntity &&
+        id == other.id &&
         address == other.address &&
         name == other.name;
   }
@@ -85,6 +103,7 @@ class _$CharacterEntity extends CharacterEntity {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jf(_$hash);
@@ -93,16 +112,21 @@ class _$CharacterEntity extends CharacterEntity {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'CharacterEntity')
+    return (newBuiltValueToStringHelper(r'SmartCharacterEntity')
+          ..add('id', id)
           ..add('address', address)
           ..add('name', name))
         .toString();
   }
 }
 
-class CharacterEntityBuilder
-    implements Builder<CharacterEntity, CharacterEntityBuilder> {
-  _$CharacterEntity? _$v;
+class SmartCharacterEntityBuilder
+    implements Builder<SmartCharacterEntity, SmartCharacterEntityBuilder> {
+  _$SmartCharacterEntity? _$v;
+
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
   String? _address;
   String? get address => _$this._address;
@@ -112,11 +136,12 @@ class CharacterEntityBuilder
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
-  CharacterEntityBuilder();
+  SmartCharacterEntityBuilder();
 
-  CharacterEntityBuilder get _$this {
+  SmartCharacterEntityBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _address = $v.address;
       _name = $v.name;
       _$v = null;
@@ -125,25 +150,27 @@ class CharacterEntityBuilder
   }
 
   @override
-  void replace(CharacterEntity other) {
-    _$v = other as _$CharacterEntity;
+  void replace(SmartCharacterEntity other) {
+    _$v = other as _$SmartCharacterEntity;
   }
 
   @override
-  void update(void Function(CharacterEntityBuilder)? updates) {
+  void update(void Function(SmartCharacterEntityBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  CharacterEntity build() => _build();
+  SmartCharacterEntity build() => _build();
 
-  _$CharacterEntity _build() {
+  _$SmartCharacterEntity _build() {
     final _$result = _$v ??
-        _$CharacterEntity._(
+        _$SmartCharacterEntity._(
+          id: BuiltValueNullFieldError.checkNotNull(
+              id, r'SmartCharacterEntity', 'id'),
           address: BuiltValueNullFieldError.checkNotNull(
-              address, r'CharacterEntity', 'address'),
+              address, r'SmartCharacterEntity', 'address'),
           name: BuiltValueNullFieldError.checkNotNull(
-              name, r'CharacterEntity', 'name'),
+              name, r'SmartCharacterEntity', 'name'),
         );
     replace(_$result);
     return _$result;

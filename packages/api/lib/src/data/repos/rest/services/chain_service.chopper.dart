@@ -19,17 +19,6 @@ final class _$ChainService extends ChainService {
   final Type definitionType = ChainService;
 
   @override
-  Future<Response<BuiltList<KillMailEntity>>> getKillMails() {
-    final Uri $url = Uri.parse('/killmails');
-    final Request $request = Request(
-      'GET',
-      $url,
-      client.baseUrl,
-    );
-    return client.send<BuiltList<KillMailEntity>, KillMailEntity>($request);
-  }
-
-  @override
   Future<Response<dynamic>> metaTransaction(ErcEntity erc) {
     final Uri $url = Uri.parse('/metatransaction');
     final $body = erc;
@@ -43,44 +32,92 @@ final class _$ChainService extends ChainService {
   }
 
   @override
-  Future<Response<BuiltList<SimpleSmartAssemblyEntity>>> getSmartAssemblies() {
-    final Uri $url = Uri.parse('/smartassemblies');
+  Future<Response<PaginationDataEntity<KillMailEntity>>> getKillMails({
+    int? limit,
+    int? offset,
+  }) {
+    final Uri $url = Uri.parse('/v2/killmails');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'limit': limit,
+      'offset': offset,
+    };
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
+      parameters: $params,
     );
-    return client.send<BuiltList<SimpleSmartAssemblyEntity>,
-        SimpleSmartAssemblyEntity>($request);
+    return client
+        .send<PaginationDataEntity<KillMailEntity>, KillMailEntity>($request);
   }
 
   @override
-  Future<Response<SimpleSmartAssemblyEntity>> getSmartAssemblie(String id) {
-    final Uri $url = Uri.parse('/smartassemblies/${id}');
+  Future<Response<KillMailEntity>> getKillMail(String id) {
+    final Uri $url = Uri.parse('/v2/killmails/${id}');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client
-        .send<SimpleSmartAssemblyEntity, SimpleSmartAssemblyEntity>($request);
+    return client.send<KillMailEntity, KillMailEntity>($request);
   }
 
   @override
-  Future<Response<BuiltList<SmartCharacterEntity>>> getSmartCharacters() {
-    final Uri $url = Uri.parse('/smartcharacters');
+  Future<Response<PaginationDataEntity<SmartAssemblyEntity>>>
+      getSmartAssemblies({
+    int? limit,
+    int? offset,
+  }) {
+    final Uri $url = Uri.parse('/v2/smartassemblies');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'limit': limit,
+      'offset': offset,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<PaginationDataEntity<SmartAssemblyEntity>,
+        SmartAssemblyEntity>($request);
+  }
+
+  @override
+  Future<Response<SmartAssemblyEntity>> getSmartAssemblie(String id) {
+    final Uri $url = Uri.parse('/v2/smartassemblies/${id}');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client
-        .send<BuiltList<SmartCharacterEntity>, SmartCharacterEntity>($request);
+    return client.send<SmartAssemblyEntity, SmartAssemblyEntity>($request);
+  }
+
+  @override
+  Future<Response<PaginationDataEntity<SmartCharacterEntity>>>
+      getSmartCharacters({
+    int? limit,
+    int? offset,
+  }) {
+    final Uri $url = Uri.parse('/v2/smartcharacters');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'limit': limit,
+      'offset': offset,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<PaginationDataEntity<SmartCharacterEntity>,
+        SmartCharacterEntity>($request);
   }
 
   @override
   Future<Response<SmartCharacterEntity>> getSmartCharacter(String id) {
-    final Uri $url = Uri.parse('/smartcharacters/${id}');
+    final Uri $url = Uri.parse('/v2/smartcharacters/${id}');
     final Request $request = Request(
       'GET',
       $url,

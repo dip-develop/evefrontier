@@ -23,5 +23,8 @@ abstract class MetaService extends ChopperService {
 
   // Tells you if the World API is ok
   @GET(path: '/health')
-  Future<Response<HeatlhyEntity>> getHealth();
+  Future<Response<HealthyEntity>> getHealth();
+  // Verify a Provable Object Datatype object
+  @POST(path: '/v2/pod/verify')
+  Future<Response<VerifyResponseEntry>> verifyPod(PodEntity pod);
 }

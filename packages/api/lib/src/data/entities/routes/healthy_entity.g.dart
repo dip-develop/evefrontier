@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'heatlhy_entity.dart';
+part of 'healthy_entity.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<HeatlhyEntity> _$heatlhyEntitySerializer =
-    _$HeatlhyEntitySerializer();
+Serializer<HealthyEntity> _$healthyEntitySerializer =
+    _$HealthyEntitySerializer();
 
-class _$HeatlhyEntitySerializer implements StructuredSerializer<HeatlhyEntity> {
+class _$HealthyEntitySerializer implements StructuredSerializer<HealthyEntity> {
   @override
-  final Iterable<Type> types = const [HeatlhyEntity, _$HeatlhyEntity];
+  final Iterable<Type> types = const [HealthyEntity, _$HealthyEntity];
   @override
-  final String wireName = 'HeatlhyEntity';
+  final String wireName = 'HealthyEntity';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, HeatlhyEntity object,
+  Iterable<Object?> serialize(Serializers serializers, HealthyEntity object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'ok',
@@ -27,10 +27,10 @@ class _$HeatlhyEntitySerializer implements StructuredSerializer<HeatlhyEntity> {
   }
 
   @override
-  HeatlhyEntity deserialize(
+  HealthyEntity deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = HeatlhyEntityBuilder();
+    final result = HealthyEntityBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -49,25 +49,25 @@ class _$HeatlhyEntitySerializer implements StructuredSerializer<HeatlhyEntity> {
   }
 }
 
-class _$HeatlhyEntity extends HeatlhyEntity {
+class _$HealthyEntity extends HealthyEntity {
   @override
   final bool ok;
 
-  factory _$HeatlhyEntity([void Function(HeatlhyEntityBuilder)? updates]) =>
-      (HeatlhyEntityBuilder()..update(updates))._build();
+  factory _$HealthyEntity([void Function(HealthyEntityBuilder)? updates]) =>
+      (HealthyEntityBuilder()..update(updates))._build();
 
-  _$HeatlhyEntity._({required this.ok}) : super._();
+  _$HealthyEntity._({required this.ok}) : super._();
   @override
-  HeatlhyEntity rebuild(void Function(HeatlhyEntityBuilder) updates) =>
+  HealthyEntity rebuild(void Function(HealthyEntityBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  HeatlhyEntityBuilder toBuilder() => HeatlhyEntityBuilder()..replace(this);
+  HealthyEntityBuilder toBuilder() => HealthyEntityBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is HeatlhyEntity && ok == other.ok;
+    return other is HealthyEntity && ok == other.ok;
   }
 
   @override
@@ -80,22 +80,22 @@ class _$HeatlhyEntity extends HeatlhyEntity {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'HeatlhyEntity')..add('ok', ok))
+    return (newBuiltValueToStringHelper(r'HealthyEntity')..add('ok', ok))
         .toString();
   }
 }
 
-class HeatlhyEntityBuilder
-    implements Builder<HeatlhyEntity, HeatlhyEntityBuilder> {
-  _$HeatlhyEntity? _$v;
+class HealthyEntityBuilder
+    implements Builder<HealthyEntity, HealthyEntityBuilder> {
+  _$HealthyEntity? _$v;
 
   bool? _ok;
   bool? get ok => _$this._ok;
   set ok(bool? ok) => _$this._ok = ok;
 
-  HeatlhyEntityBuilder();
+  HealthyEntityBuilder();
 
-  HeatlhyEntityBuilder get _$this {
+  HealthyEntityBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _ok = $v.ok;
@@ -105,22 +105,22 @@ class HeatlhyEntityBuilder
   }
 
   @override
-  void replace(HeatlhyEntity other) {
-    _$v = other as _$HeatlhyEntity;
+  void replace(HealthyEntity other) {
+    _$v = other as _$HealthyEntity;
   }
 
   @override
-  void update(void Function(HeatlhyEntityBuilder)? updates) {
+  void update(void Function(HealthyEntityBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  HeatlhyEntity build() => _build();
+  HealthyEntity build() => _build();
 
-  _$HeatlhyEntity _build() {
+  _$HealthyEntity _build() {
     final _$result = _$v ??
-        _$HeatlhyEntity._(
-          ok: BuiltValueNullFieldError.checkNotNull(ok, r'HeatlhyEntity', 'ok'),
+        _$HealthyEntity._(
+          ok: BuiltValueNullFieldError.checkNotNull(ok, r'HealthyEntity', 'ok'),
         );
     replace(_$result);
     return _$result;

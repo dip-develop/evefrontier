@@ -42,13 +42,24 @@ final class _$MetaService extends MetaService {
   }
 
   @override
-  Future<Response<HeatlhyEntity>> getHealth() {
+  Future<Response<HealthyEntity>> getHealth() {
     final Uri $url = Uri.parse('/health');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client.send<HeatlhyEntity, HeatlhyEntity>($request);
+    return client.send<HealthyEntity, HealthyEntity>($request);
+  }
+
+  @override
+  Future<Response<VerifyResponseEntry>> verifyPod(PodEntity pod) {
+    final Uri $url = Uri.parse('/v2/pod/verify');
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<VerifyResponseEntry, VerifyResponseEntry>($request);
   }
 }

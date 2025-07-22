@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'smart_assembly_enum.dart';
+part of 'smart_assembly_type_enum.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-const SmartAssemblyEnum _$smartStorageUnit =
-    const SmartAssemblyEnum._('smartStorageUnit');
-const SmartAssemblyEnum _$smartTurret =
-    const SmartAssemblyEnum._('smartTurret');
-const SmartAssemblyEnum _$smartGate = const SmartAssemblyEnum._('smartGate');
-const SmartAssemblyEnum _$unknown = const SmartAssemblyEnum._('unknown');
+const SmartAssemblyTypeEnum _$smartStorageUnit =
+    const SmartAssemblyTypeEnum._('smartStorageUnit');
+const SmartAssemblyTypeEnum _$smartTurret =
+    const SmartAssemblyTypeEnum._('smartTurret');
+const SmartAssemblyTypeEnum _$smartGate =
+    const SmartAssemblyTypeEnum._('smartGate');
+const SmartAssemblyTypeEnum _$unknown =
+    const SmartAssemblyTypeEnum._('unknown');
 
-SmartAssemblyEnum _$valueOf(String name) {
+SmartAssemblyTypeEnum _$valueOf(String name) {
   switch (name) {
     case 'smartStorageUnit':
       return _$smartStorageUnit;
@@ -28,19 +30,19 @@ SmartAssemblyEnum _$valueOf(String name) {
   }
 }
 
-final BuiltSet<SmartAssemblyEnum> _$values =
-    BuiltSet<SmartAssemblyEnum>(const <SmartAssemblyEnum>[
+final BuiltSet<SmartAssemblyTypeEnum> _$values =
+    BuiltSet<SmartAssemblyTypeEnum>(const <SmartAssemblyTypeEnum>[
   _$smartStorageUnit,
   _$smartTurret,
   _$smartGate,
   _$unknown,
 ]);
 
-Serializer<SmartAssemblyEnum> _$smartAssemblyEnumSerializer =
-    _$SmartAssemblyEnumSerializer();
+Serializer<SmartAssemblyTypeEnum> _$smartAssemblyTypeEnumSerializer =
+    _$SmartAssemblyTypeEnumSerializer();
 
-class _$SmartAssemblyEnumSerializer
-    implements PrimitiveSerializer<SmartAssemblyEnum> {
+class _$SmartAssemblyTypeEnumSerializer
+    implements PrimitiveSerializer<SmartAssemblyTypeEnum> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'smartStorageUnit': 'SmartStorageUnit',
     'smartTurret': 'SmartTurret',
@@ -55,19 +57,19 @@ class _$SmartAssemblyEnumSerializer
   };
 
   @override
-  final Iterable<Type> types = const <Type>[SmartAssemblyEnum];
+  final Iterable<Type> types = const <Type>[SmartAssemblyTypeEnum];
   @override
-  final String wireName = 'SmartAssemblyEnum';
+  final String wireName = 'SmartAssemblyTypeEnum';
 
   @override
-  Object serialize(Serializers serializers, SmartAssemblyEnum object,
+  Object serialize(Serializers serializers, SmartAssemblyTypeEnum object,
           {FullType specifiedType = FullType.unspecified}) =>
       _toWire[object.name] ?? object.name;
 
   @override
-  SmartAssemblyEnum deserialize(Serializers serializers, Object serialized,
+  SmartAssemblyTypeEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      SmartAssemblyEnum.valueOf(
+      SmartAssemblyTypeEnum.valueOf(
           _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 

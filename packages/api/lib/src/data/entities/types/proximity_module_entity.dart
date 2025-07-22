@@ -2,7 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'simple_smart_assembly_entity.dart';
+import '../entities.dart';
 
 part 'proximity_module_entity.g.dart';
 
@@ -12,8 +12,8 @@ abstract class ProximityModuleEntity
   static Serializer<ProximityModuleEntity> get serializer =>
       _$proximityModuleEntitySerializer;
 
-  BuiltList<SimpleSmartAssemblyEntity> get aggression;
-  BuiltList<SimpleSmartAssemblyEntity> get inProximity;
+  BuiltList<SmartAssemblyEntity> get aggression;
+  BuiltList<SmartAssemblyEntity> get inProximity;
 
   ProximityModuleEntity._();
   factory ProximityModuleEntity(

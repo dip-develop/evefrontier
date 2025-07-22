@@ -20,21 +20,20 @@ class _$KillMailEntitySerializer
   Iterable<Object?> serialize(Serializers serializers, KillMailEntity object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'killer',
       serializers.serialize(object.killer,
-          specifiedType: const FullType(CharacterEntity)),
-      'loss_type',
-      serializers.serialize(object.lossType,
-          specifiedType: const FullType(LossTypeEnum)),
-      'solar_system_id',
+          specifiedType: const FullType(SmartCharacterEntity)),
+      'solarSystemId',
       serializers.serialize(object.solarSystemId,
           specifiedType: const FullType(int)),
-      'timestamp',
-      serializers.serialize(object.timestamp,
-          specifiedType: const FullType(int)),
+      'time',
+      serializers.serialize(object.time,
+          specifiedType: const FullType(DateTime)),
       'victim',
       serializers.serialize(object.victim,
-          specifiedType: const FullType(CharacterEntity)),
+          specifiedType: const FullType(SmartCharacterEntity)),
     ];
 
     return result;
@@ -52,27 +51,27 @@ class _$KillMailEntitySerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
         case 'killer':
           result.killer.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(CharacterEntity))!
-              as CharacterEntity);
+                  specifiedType: const FullType(SmartCharacterEntity))!
+              as SmartCharacterEntity);
           break;
-        case 'loss_type':
-          result.lossType = serializers.deserialize(value,
-              specifiedType: const FullType(LossTypeEnum))! as LossTypeEnum;
-          break;
-        case 'solar_system_id':
+        case 'solarSystemId':
           result.solarSystemId = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'timestamp':
-          result.timestamp = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+        case 'time':
+          result.time = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime))! as DateTime;
           break;
         case 'victim':
           result.victim.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(CharacterEntity))!
-              as CharacterEntity);
+                  specifiedType: const FullType(SmartCharacterEntity))!
+              as SmartCharacterEntity);
           break;
       }
     }
@@ -83,24 +82,24 @@ class _$KillMailEntitySerializer
 
 class _$KillMailEntity extends KillMailEntity {
   @override
-  final CharacterEntity killer;
+  final int id;
   @override
-  final LossTypeEnum lossType;
+  final SmartCharacterEntity killer;
   @override
   final int solarSystemId;
   @override
-  final int timestamp;
+  final DateTime time;
   @override
-  final CharacterEntity victim;
+  final SmartCharacterEntity victim;
 
   factory _$KillMailEntity([void Function(KillMailEntityBuilder)? updates]) =>
       (KillMailEntityBuilder()..update(updates))._build();
 
   _$KillMailEntity._(
-      {required this.killer,
-      required this.lossType,
+      {required this.id,
+      required this.killer,
       required this.solarSystemId,
-      required this.timestamp,
+      required this.time,
       required this.victim})
       : super._();
   @override
@@ -114,20 +113,20 @@ class _$KillMailEntity extends KillMailEntity {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is KillMailEntity &&
+        id == other.id &&
         killer == other.killer &&
-        lossType == other.lossType &&
         solarSystemId == other.solarSystemId &&
-        timestamp == other.timestamp &&
+        time == other.time &&
         victim == other.victim;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, killer.hashCode);
-    _$hash = $jc(_$hash, lossType.hashCode);
     _$hash = $jc(_$hash, solarSystemId.hashCode);
-    _$hash = $jc(_$hash, timestamp.hashCode);
+    _$hash = $jc(_$hash, time.hashCode);
     _$hash = $jc(_$hash, victim.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -136,10 +135,10 @@ class _$KillMailEntity extends KillMailEntity {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'KillMailEntity')
+          ..add('id', id)
           ..add('killer', killer)
-          ..add('lossType', lossType)
           ..add('solarSystemId', solarSystemId)
-          ..add('timestamp', timestamp)
+          ..add('time', time)
           ..add('victim', victim))
         .toString();
   }
@@ -149,38 +148,38 @@ class KillMailEntityBuilder
     implements Builder<KillMailEntity, KillMailEntityBuilder> {
   _$KillMailEntity? _$v;
 
-  CharacterEntityBuilder? _killer;
-  CharacterEntityBuilder get killer =>
-      _$this._killer ??= CharacterEntityBuilder();
-  set killer(CharacterEntityBuilder? killer) => _$this._killer = killer;
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
 
-  LossTypeEnum? _lossType;
-  LossTypeEnum? get lossType => _$this._lossType;
-  set lossType(LossTypeEnum? lossType) => _$this._lossType = lossType;
+  SmartCharacterEntityBuilder? _killer;
+  SmartCharacterEntityBuilder get killer =>
+      _$this._killer ??= SmartCharacterEntityBuilder();
+  set killer(SmartCharacterEntityBuilder? killer) => _$this._killer = killer;
 
   int? _solarSystemId;
   int? get solarSystemId => _$this._solarSystemId;
   set solarSystemId(int? solarSystemId) =>
       _$this._solarSystemId = solarSystemId;
 
-  int? _timestamp;
-  int? get timestamp => _$this._timestamp;
-  set timestamp(int? timestamp) => _$this._timestamp = timestamp;
+  DateTime? _time;
+  DateTime? get time => _$this._time;
+  set time(DateTime? time) => _$this._time = time;
 
-  CharacterEntityBuilder? _victim;
-  CharacterEntityBuilder get victim =>
-      _$this._victim ??= CharacterEntityBuilder();
-  set victim(CharacterEntityBuilder? victim) => _$this._victim = victim;
+  SmartCharacterEntityBuilder? _victim;
+  SmartCharacterEntityBuilder get victim =>
+      _$this._victim ??= SmartCharacterEntityBuilder();
+  set victim(SmartCharacterEntityBuilder? victim) => _$this._victim = victim;
 
   KillMailEntityBuilder();
 
   KillMailEntityBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _killer = $v.killer.toBuilder();
-      _lossType = $v.lossType;
       _solarSystemId = $v.solarSystemId;
-      _timestamp = $v.timestamp;
+      _time = $v.time;
       _victim = $v.victim.toBuilder();
       _$v = null;
     }
@@ -205,13 +204,13 @@ class KillMailEntityBuilder
     try {
       _$result = _$v ??
           _$KillMailEntity._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'KillMailEntity', 'id'),
             killer: killer.build(),
-            lossType: BuiltValueNullFieldError.checkNotNull(
-                lossType, r'KillMailEntity', 'lossType'),
             solarSystemId: BuiltValueNullFieldError.checkNotNull(
                 solarSystemId, r'KillMailEntity', 'solarSystemId'),
-            timestamp: BuiltValueNullFieldError.checkNotNull(
-                timestamp, r'KillMailEntity', 'timestamp'),
+            time: BuiltValueNullFieldError.checkNotNull(
+                time, r'KillMailEntity', 'time'),
             victim: victim.build(),
           );
     } catch (_) {

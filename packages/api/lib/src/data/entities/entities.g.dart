@@ -17,14 +17,13 @@ Serializers _$entititySerializers = (Serializers().toBuilder()
       ..add(AttributeEntity.serializer)
       ..add(AttributePropertiesEntity.serializer)
       ..add(ChainConfigEntity.serializer)
-      ..add(CharacterEntity.serializer)
       ..add(ContractsEntity.serializer)
       ..add(EipEntity.serializer)
       ..add(EphemeralInventoryEntity.serializer)
       ..add(ErcEntity.serializer)
       ..add(FuelModuleEntity.serializer)
       ..add(GateLinkModuleEntity.serializer)
-      ..add(HeatlhyEntity.serializer)
+      ..add(HealthyEntity.serializer)
       ..add(InventoryItemEntity.serializer)
       ..add(InventoryModuleEntity.serializer)
       ..add(ItemTypeIDsEntity.serializer)
@@ -33,17 +32,23 @@ Serializers _$entititySerializers = (Serializers().toBuilder()
       ..add(LossTypeEnum.serializer)
       ..add(MetadataEntity.serializer)
       ..add(NativeCurrencyEntity.serializer)
+      ..add(PaginationMetadataEntry.serializer)
+      ..add(PodEntity.serializer)
+      ..add(PodValueEntity.serializer)
+      ..add(PodValueTypeEnum.serializer)
       ..add(ProximityModuleEntity.serializer)
       ..add(RpcEntity.serializer)
       ..add(RpcUrlsEntity.serializer)
-      ..add(SimpleSmartAssemblyEntity.serializer)
       ..add(SmartAssemblyEntity.serializer)
-      ..add(SmartAssemblyEnum.serializer)
+      ..add(SmartAssemblyStateEnum.serializer)
+      ..add(SmartAssemblyTypeEnum.serializer)
       ..add(SmartCharacterEntity.serializer)
       ..add(SolarSystemEntity.serializer)
       ..add(StaticDataEntity.serializer)
       ..add(SystemIdsEntity.serializer)
+      ..add(TypeEntity.serializer)
       ..add(UrlsEntity.serializer)
+      ..add(VerifyResponseEntry.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(AbiCfgEntity)]),
           () => ListBuilder<AbiCfgEntity>())
@@ -83,26 +88,29 @@ Serializers _$entititySerializers = (Serializers().toBuilder()
           () => ListBuilder<InventoryItemEntity>())
       ..addBuilderFactory(
           const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)]),
-          () => ListBuilder<SimpleSmartAssemblyEntity>())
+              BuiltList, const [const FullType(SmartAssemblyEntity)]),
+          () => ListBuilder<SmartAssemblyEntity>())
       ..addBuilderFactory(
           const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)]),
-          () => ListBuilder<SimpleSmartAssemblyEntity>())
+              BuiltList, const [const FullType(SmartAssemblyEntity)]),
+          () => ListBuilder<SmartAssemblyEntity>())
       ..addBuilderFactory(
           const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)]),
-          () => ListBuilder<SimpleSmartAssemblyEntity>())
-      ..addBuilderFactory(
-          const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)]),
-          () => ListBuilder<SimpleSmartAssemblyEntity>())
+              BuiltList, const [const FullType(SmartAssemblyEntity)]),
+          () => ListBuilder<SmartAssemblyEntity>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
-          () => ListBuilder<String>()))
+          () => ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType(PodValueEntity)]),
+          () => MapBuilder<String, PodValueEntity>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

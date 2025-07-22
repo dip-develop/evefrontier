@@ -23,8 +23,8 @@ class RestRepoImpl implements RestRepo {
 
   RestRepoImpl() {
     final client = ChopperClient(
-      baseUrl: Uri.tryParse(
-          'https://blockchain-gateway-stillness.live.tech.evefrontier.com'),
+      baseUrl:
+          Uri.tryParse('https://world-api-stillness.live.tech.evefrontier.com'),
       converter: BuiltValueConverter(entititySerializers),
       errorConverter: BuiltValueConverter(entititySerializers),
       services: [
@@ -58,27 +58,40 @@ class RestRepoImpl implements RestRepo {
   @override
 
   /// Tells you if the World API is ok
-  Future<HeatlhyEntity> getHealth() => _meta.getHealth().then(_getData);
+  Future<HealthyEntity> getHealth() => _meta.getHealth().then(_getData);
 
   @override
-  Future<BuiltList<KillMailEntity>> getKillMails() =>
-      _chain.getKillMails().then(_getData);
+
+  /// Verify a Provable Object Datatype object
+  Future<VerifyResponseEntry> verifyPod(PodEntity pod) =>
+      _meta.verifyPod(pod).then(_getData);
 
   @override
-  Future<SimpleSmartAssemblyEntity> getSmartAssemblie(String id) =>
+  Future<PaginationDataEntity<KillMailEntity>> getKillMails(
+          {int? limit, int? offset}) =>
+      _chain.getKillMails(limit: limit, offset: offset).then(_getData);
+
+  @override
+  Future<KillMailEntity> getKillMail(String id) =>
+      _chain.getKillMail(id).then(_getData);
+
+  @override
+  Future<SmartAssemblyEntity> getSmartAssemblie(String id) =>
       _chain.getSmartAssemblie(id).then(_getData);
 
   @override
-  Future<BuiltList<SimpleSmartAssemblyEntity>> getSmartAssemblies() =>
-      _chain.getSmartAssemblies().then(_getData);
+  Future<PaginationDataEntity<SmartAssemblyEntity>> getSmartAssemblies(
+          {int? limit, int? offset}) =>
+      _chain.getSmartAssemblies(limit: limit, offset: offset).then(_getData);
+
+  @override
+  Future<PaginationDataEntity<SmartCharacterEntity>> getSmartCharacters(
+          {int? limit, int? offset}) =>
+      _chain.getSmartCharacters(limit: limit, offset: offset).then(_getData);
 
   @override
   Future<SmartCharacterEntity> getSmartCharacter(String id) =>
       _chain.getSmartCharacter(id).then(_getData);
-
-  @override
-  Future<BuiltList<SmartCharacterEntity>> getSmartCharacters() =>
-      _chain.getSmartCharacters().then(_getData);
 
   @override
   Future<BuiltMap<String, SolarSystemEntity>> getSolarSystems() =>

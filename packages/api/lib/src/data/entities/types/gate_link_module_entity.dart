@@ -2,7 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'simple_smart_assembly_entity.dart';
+import '../entities.dart';
 
 part 'gate_link_module_entity.g.dart';
 
@@ -13,7 +13,7 @@ abstract class GateLinkModuleEntity
       _$gateLinkModuleEntitySerializer;
 
   String get destinationGate;
-  BuiltList<SimpleSmartAssemblyEntity> get gatesInRange;
+  BuiltList<SmartAssemblyEntity> get gatesInRange;
   bool get isLinked;
 
   GateLinkModuleEntity._();

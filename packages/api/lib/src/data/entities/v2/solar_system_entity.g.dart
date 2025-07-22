@@ -20,15 +20,13 @@ class _$SolarSystemEntitySerializer
   Iterable<Object?> serialize(Serializers serializers, SolarSystemEntity object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'location',
       serializers.serialize(object.location,
           specifiedType: const FullType(LocationEntity)),
-      'solarSystemId',
-      serializers.serialize(object.solarSystemId,
-          specifiedType: const FullType(int)),
-      'solarSystemName',
-      serializers.serialize(object.solarSystemName,
-          specifiedType: const FullType(String)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -46,17 +44,17 @@ class _$SolarSystemEntitySerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
         case 'location':
           result.location.replace(serializers.deserialize(value,
                   specifiedType: const FullType(LocationEntity))!
               as LocationEntity);
           break;
-        case 'solarSystemId':
-          result.solarSystemId = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
-        case 'solarSystemName':
-          result.solarSystemName = serializers.deserialize(value,
+        case 'name':
+          result.name = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
       }
@@ -68,20 +66,18 @@ class _$SolarSystemEntitySerializer
 
 class _$SolarSystemEntity extends SolarSystemEntity {
   @override
+  final int id;
+  @override
   final LocationEntity location;
   @override
-  final int solarSystemId;
-  @override
-  final String solarSystemName;
+  final String name;
 
   factory _$SolarSystemEntity(
           [void Function(SolarSystemEntityBuilder)? updates]) =>
       (SolarSystemEntityBuilder()..update(updates))._build();
 
   _$SolarSystemEntity._(
-      {required this.location,
-      required this.solarSystemId,
-      required this.solarSystemName})
+      {required this.id, required this.location, required this.name})
       : super._();
   @override
   SolarSystemEntity rebuild(void Function(SolarSystemEntityBuilder) updates) =>
@@ -95,17 +91,17 @@ class _$SolarSystemEntity extends SolarSystemEntity {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SolarSystemEntity &&
+        id == other.id &&
         location == other.location &&
-        solarSystemId == other.solarSystemId &&
-        solarSystemName == other.solarSystemName;
+        name == other.name;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, location.hashCode);
-    _$hash = $jc(_$hash, solarSystemId.hashCode);
-    _$hash = $jc(_$hash, solarSystemName.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -113,9 +109,9 @@ class _$SolarSystemEntity extends SolarSystemEntity {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'SolarSystemEntity')
+          ..add('id', id)
           ..add('location', location)
-          ..add('solarSystemId', solarSystemId)
-          ..add('solarSystemName', solarSystemName))
+          ..add('name', name))
         .toString();
   }
 }
@@ -124,29 +120,27 @@ class SolarSystemEntityBuilder
     implements Builder<SolarSystemEntity, SolarSystemEntityBuilder> {
   _$SolarSystemEntity? _$v;
 
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
   LocationEntityBuilder? _location;
   LocationEntityBuilder get location =>
       _$this._location ??= LocationEntityBuilder();
   set location(LocationEntityBuilder? location) => _$this._location = location;
 
-  int? _solarSystemId;
-  int? get solarSystemId => _$this._solarSystemId;
-  set solarSystemId(int? solarSystemId) =>
-      _$this._solarSystemId = solarSystemId;
-
-  String? _solarSystemName;
-  String? get solarSystemName => _$this._solarSystemName;
-  set solarSystemName(String? solarSystemName) =>
-      _$this._solarSystemName = solarSystemName;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
   SolarSystemEntityBuilder();
 
   SolarSystemEntityBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _location = $v.location.toBuilder();
-      _solarSystemId = $v.solarSystemId;
-      _solarSystemName = $v.solarSystemName;
+      _name = $v.name;
       _$v = null;
     }
     return this;
@@ -170,11 +164,11 @@ class SolarSystemEntityBuilder
     try {
       _$result = _$v ??
           _$SolarSystemEntity._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'SolarSystemEntity', 'id'),
             location: location.build(),
-            solarSystemId: BuiltValueNullFieldError.checkNotNull(
-                solarSystemId, r'SolarSystemEntity', 'solarSystemId'),
-            solarSystemName: BuiltValueNullFieldError.checkNotNull(
-                solarSystemName, r'SolarSystemEntity', 'solarSystemName'),
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'SolarSystemEntity', 'name'),
           );
     } catch (_) {
       late String _$failedField;

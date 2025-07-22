@@ -35,7 +35,7 @@ class _$SmartCharacterEntitySerializer
       'smartAssemblies',
       serializers.serialize(object.smartAssemblies,
           specifiedType: const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)])),
+              BuiltList, const [const FullType(SmartAssemblyEntity)])),
     ];
     Object? value;
     value = object.corpId;
@@ -133,9 +133,9 @@ class _$SmartCharacterEntitySerializer
           break;
         case 'smartAssemblies':
           result.smartAssemblies.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(SimpleSmartAssemblyEntity)
-              ]))! as BuiltList<Object?>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SmartAssemblyEntity)]))!
+              as BuiltList<Object?>);
           break;
       }
     }
@@ -164,7 +164,7 @@ class _$SmartCharacterEntity extends SmartCharacterEntity {
   @override
   final String name;
   @override
-  final BuiltList<SimpleSmartAssemblyEntity> smartAssemblies;
+  final BuiltList<SmartAssemblyEntity> smartAssemblies;
 
   factory _$SmartCharacterEntity(
           [void Function(SmartCharacterEntityBuilder)? updates]) =>
@@ -284,11 +284,10 @@ class SmartCharacterEntityBuilder
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
-  ListBuilder<SimpleSmartAssemblyEntity>? _smartAssemblies;
-  ListBuilder<SimpleSmartAssemblyEntity> get smartAssemblies =>
-      _$this._smartAssemblies ??= ListBuilder<SimpleSmartAssemblyEntity>();
-  set smartAssemblies(
-          ListBuilder<SimpleSmartAssemblyEntity>? smartAssemblies) =>
+  ListBuilder<SmartAssemblyEntity>? _smartAssemblies;
+  ListBuilder<SmartAssemblyEntity> get smartAssemblies =>
+      _$this._smartAssemblies ??= ListBuilder<SmartAssemblyEntity>();
+  set smartAssemblies(ListBuilder<SmartAssemblyEntity>? smartAssemblies) =>
       _$this._smartAssemblies = smartAssemblies;
 
   SmartCharacterEntityBuilder();

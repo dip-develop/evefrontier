@@ -1,8 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'character_entity.dart';
-import 'loss_type_enum.dart';
+import 'smart_character_entity.dart';
 
 part 'kill_mail_entity.g.dart';
 
@@ -12,13 +11,11 @@ abstract class KillMailEntity
   static Serializer<KillMailEntity> get serializer =>
       _$killMailEntitySerializer;
 
-  CharacterEntity get killer;
-  @BuiltValueField(wireName: 'loss_type')
-  LossTypeEnum get lossType;
-  @BuiltValueField(wireName: 'solar_system_id')
+  int get id;
+  SmartCharacterEntity get killer;
   int get solarSystemId;
-  int get timestamp;
-  CharacterEntity get victim;
+  DateTime get time;
+  SmartCharacterEntity get victim;
 
   KillMailEntity._();
   factory KillMailEntity([void Function(KillMailEntityBuilder) updates]) =

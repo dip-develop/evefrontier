@@ -11,9 +11,9 @@ abstract class SolarSystemEntity
   static Serializer<SolarSystemEntity> get serializer =>
       _$solarSystemEntitySerializer;
 
+  int get id;
   LocationEntity get location;
-  int get solarSystemId;
-  String get solarSystemName;
+  String get name;
 
   SolarSystemEntity._();
   factory SolarSystemEntity([void Function(SolarSystemEntityBuilder) updates]) =

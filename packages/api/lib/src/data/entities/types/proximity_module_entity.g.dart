@@ -27,11 +27,11 @@ class _$ProximityModuleEntitySerializer
       'aggression',
       serializers.serialize(object.aggression,
           specifiedType: const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)])),
+              BuiltList, const [const FullType(SmartAssemblyEntity)])),
       'inProximity',
       serializers.serialize(object.inProximity,
           specifiedType: const FullType(
-              BuiltList, const [const FullType(SimpleSmartAssemblyEntity)])),
+              BuiltList, const [const FullType(SmartAssemblyEntity)])),
     ];
 
     return result;
@@ -51,15 +51,15 @@ class _$ProximityModuleEntitySerializer
       switch (key) {
         case 'aggression':
           result.aggression.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(SimpleSmartAssemblyEntity)
-              ]))! as BuiltList<Object?>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SmartAssemblyEntity)]))!
+              as BuiltList<Object?>);
           break;
         case 'inProximity':
           result.inProximity.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(SimpleSmartAssemblyEntity)
-              ]))! as BuiltList<Object?>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SmartAssemblyEntity)]))!
+              as BuiltList<Object?>);
           break;
       }
     }
@@ -70,9 +70,9 @@ class _$ProximityModuleEntitySerializer
 
 class _$ProximityModuleEntity extends ProximityModuleEntity {
   @override
-  final BuiltList<SimpleSmartAssemblyEntity> aggression;
+  final BuiltList<SmartAssemblyEntity> aggression;
   @override
-  final BuiltList<SimpleSmartAssemblyEntity> inProximity;
+  final BuiltList<SmartAssemblyEntity> inProximity;
 
   factory _$ProximityModuleEntity(
           [void Function(ProximityModuleEntityBuilder)? updates]) =>
@@ -120,16 +120,16 @@ class ProximityModuleEntityBuilder
     implements Builder<ProximityModuleEntity, ProximityModuleEntityBuilder> {
   _$ProximityModuleEntity? _$v;
 
-  ListBuilder<SimpleSmartAssemblyEntity>? _aggression;
-  ListBuilder<SimpleSmartAssemblyEntity> get aggression =>
-      _$this._aggression ??= ListBuilder<SimpleSmartAssemblyEntity>();
-  set aggression(ListBuilder<SimpleSmartAssemblyEntity>? aggression) =>
+  ListBuilder<SmartAssemblyEntity>? _aggression;
+  ListBuilder<SmartAssemblyEntity> get aggression =>
+      _$this._aggression ??= ListBuilder<SmartAssemblyEntity>();
+  set aggression(ListBuilder<SmartAssemblyEntity>? aggression) =>
       _$this._aggression = aggression;
 
-  ListBuilder<SimpleSmartAssemblyEntity>? _inProximity;
-  ListBuilder<SimpleSmartAssemblyEntity> get inProximity =>
-      _$this._inProximity ??= ListBuilder<SimpleSmartAssemblyEntity>();
-  set inProximity(ListBuilder<SimpleSmartAssemblyEntity>? inProximity) =>
+  ListBuilder<SmartAssemblyEntity>? _inProximity;
+  ListBuilder<SmartAssemblyEntity> get inProximity =>
+      _$this._inProximity ??= ListBuilder<SmartAssemblyEntity>();
+  set inProximity(ListBuilder<SmartAssemblyEntity>? inProximity) =>
       _$this._inProximity = inProximity;
 
   ProximityModuleEntityBuilder();

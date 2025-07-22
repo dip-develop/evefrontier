@@ -5,17 +5,22 @@ import '../../data/entities/entities.dart';
 abstract interface class RestRepo {
   // Chain REST
   //
-  // Get a list all the kill mails reported by players
-  Future<BuiltList<KillMailEntity>> getKillMails();
   // Submit a meta transaction
   // Only bringOnline, bringOffline and setEntityMetadata are allowed
   Future<void> metaTransaction(ErcEntity erc);
+  // Get a list all the kill mails reported by players
+  Future<PaginationDataEntity<KillMailEntity>> getKillMails(
+      {int? limit, int? offset});
+  // Get a the kill mail report
+  Future<KillMailEntity> getKillMail(String id);
   // Get a list all the smart assemblies currently in the world
-  Future<BuiltList<SimpleSmartAssemblyEntity>> getSmartAssemblies();
+  Future<PaginationDataEntity<SmartAssemblyEntity>> getSmartAssemblies(
+      {int? limit, int? offset});
   // Retrieve one smart assembly with the given [id]
-  Future<SimpleSmartAssemblyEntity> getSmartAssemblie(String id);
+  Future<SmartAssemblyEntity> getSmartAssemblie(String id);
   // Get a list all the smart characters currently in the world
-  Future<BuiltList<SmartCharacterEntity>> getSmartCharacters();
+  Future<PaginationDataEntity<SmartCharacterEntity>> getSmartCharacters(
+      {int? limit, int? offset});
   // Retrieve one smart character with the given [id]
   Future<SmartCharacterEntity> getSmartCharacter(String id);
   // Game REST
@@ -33,5 +38,7 @@ abstract interface class RestRepo {
   // Retrieve all the config needed to connect to our services
   Future<BuiltList<ChainConfigEntity>> getConfig();
   // Tells you if the World API is ok
-  Future<HeatlhyEntity> getHealth();
+  Future<HealthyEntity> getHealth();
+  // Verify a Provable Object Datatype object
+  Future<VerifyResponseEntry> verifyPod(PodEntity pod);
 }

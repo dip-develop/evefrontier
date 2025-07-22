@@ -1,27 +1,17 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import '../entities.dart';
-
 part 'smart_character_entity.g.dart';
 
-/// This class represents a smart character entity, which includes various properties
+/// This class represents a character entity with an address and name.
 abstract class SmartCharacterEntity
     implements Built<SmartCharacterEntity, SmartCharacterEntityBuilder> {
   static Serializer<SmartCharacterEntity> get serializer =>
       _$smartCharacterEntitySerializer;
 
+  String get id;
   String get address;
-  String? get corpId;
-  BigInt? get createdAt;
-  String? get eveBalanceWei;
-  String? get gasBalanceWei;
-  double? get id;
-  String get image;
-  bool? get isSmartCharacter;
   String get name;
-  BuiltList<SmartAssemblyEntity> get smartAssemblies;
 
   SmartCharacterEntity._();
   factory SmartCharacterEntity(
