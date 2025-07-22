@@ -1,10 +1,20 @@
 name: evefrontier
+description: Open-source collection of Dart & Flutter packages and tools designed for developers and players of the EVE Frontier game.
+homepage: https://dip.dev
+issue_tracker: https://github.com/dip-develop/evefrontier/issues
+repository: https://github.com/dip-develop/evefrontier
 publish_to: none
+
+funding:
+  - https://www.buymeacoffee.com/dip.dev
+  - https://www.thanks.dev/dip-dev-info
+
 environment:
   sdk: ^3.6.0
-  
+
 workspace:
   - packages/api
+  - apps/tools
 
 dev_dependencies:
   melos: ^6.3.2

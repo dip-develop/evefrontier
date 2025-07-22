@@ -5,6 +5,16 @@ homepage: https://dip.dev
 issue_tracker: https://github.com/dip-develop/evefrontier/issues
 repository: https://github.com/dip-develop/evefrontier
 
+topics:
+  - game
+  - api
+  - eve
+  - evefrontier
+
+funding:
+  - https://www.buymeacoffee.com/dip.dev
+  - https://www.thanks.dev/dip-dev-info
+
 resolution: workspace
 
 environment:
@@ -25,13 +35,3 @@ dev_dependencies:
   build_runner: ^2.4.15
   chopper_generator: ^8.1.0
   built_value_generator: ^8.9.5
-
-topics:
-  - game
-  - api
-  - eve
-  - evefrontier
-
-funding:
-  - https://www.buymeacoffee.com/dip.dev
-  - https://www.thanks.dev/dip-dev-info

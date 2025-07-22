@@ -5,6 +5,37 @@ packages:
   - apps/**
   - packages/**
 
+version:
+  linkToCommits: true
+  changelog: true
+  workspaceChangelog: true
+  git:
+    requireCleanWorkingDir: true
+    tagPrefix: ''
+    tagNameTemplate: '{package}-v{version}'
+
+bootstrap:
+    runPubGetInParallel: false
+    usePubspecOverrides: false
+
+publish:
+  yes: true
+  prepublish:
+    - dart test
+
 scripts:
+  lint:all:
+    run: melos run analyze-ci && melos run format-ci
+    description: Run all static analysis checks.
+  bootstrap:
+    run: melos bootstrap --no-scripts
   generate:
     run: melos exec -c 1 --depends-on build_runner -- dart run build_runner build -d
+  format:
+    run: melos exec -- "dart format ."
+  analyze:
+    run: melos exec -- "dart analyze ."
+  test:
+    run: melos exec -- "dart test"
+  lint:
+    run: melos exec -- "flutter analyze --no-fatal-infos"
