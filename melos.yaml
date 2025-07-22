@@ -14,10 +14,6 @@ version:
     tagPrefix: ''
     tagNameTemplate: '{package}-v{version}'
 
-bootstrap:
-    runPubGetInParallel: false
-    usePubspecOverrides: false
-
 publish:
   yes: true
   prepublish:

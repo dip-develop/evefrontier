@@ -1,10 +1,10 @@
-# EVE Frontier 🚀
+# DIP Dev - EVE Frontier 🚀
 
-[![Pub][pub_badge_api]][pub_api]
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
 
 [![BuyMeACoffee][buy_me_a_coffee_badge]][buy_me_a_coffee]
 
-Welcome to **EVE Frontier**, an open-source collection of Dart & Flutter packages and tools designed for developers and players of the [EVE Frontier](https://evefrontier.com) game.
+Welcome to **DIP Dev - EVE Frontier**, an open-source collection of Dart & Flutter packages and tools designed for developers and players of the [EVE Frontier](https://evefrontier.com) game.
 
 This repository is a monorepo containing packages for working with the game API, visualizing maps, building custom tools, and creating apps.
 
@@ -15,13 +15,9 @@ This repository is a monorepo containing packages for working with the game API,
 ```
 packages/
     ├── api/         → Dart API client for EVE Frontier  
-    ├── map/         → Map components and visualization (Coming soon)
-    ├── tools/       → Utilities (calculators, parsers) (Coming soon)
-    └── components/  → Shared Flutter UI widgets (Coming soon)
-
+    ├── auth/        → Auth components (Coming soon)
 apps/
-    ├── dashboard/   → Player companion app (Coming soon)
-    └── viewer/      → Lightweight map viewer (Coming soon)
+    ├── tools/       → Player companion app
 ```
 
 ---
@@ -32,9 +28,8 @@ Some packages will be available on [pub.dev](https://pub.dev). Check each packag
 
 | Package             | Pub Link                     |
 |---------------------|------------------------------|
-| `evefrontier_api`           | *(Coming soon)*              |
-| `evefrontier_map`           | *(Coming soon)*              |
-| `evefrontier_tools`         | *(Coming soon)*              |
+| `evefrontier_api`           |[![Pub][pub_badge_api]][pub_api]|
+
 
 ---
 

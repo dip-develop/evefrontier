@@ -17,4 +17,4 @@ workspace:
   - apps/tools
 
 dev_dependencies:
-  melos: ^6.3.2
+  melos: ^7.0.0-dev.9
