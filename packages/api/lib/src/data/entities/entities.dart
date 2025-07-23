@@ -3,9 +3,14 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:built_value/iso_8601_duration_serializer.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:evefrontier_api/src/data/entities/v2/scan_entity.dart';
 
 import 'models/address_config_entity.dart';
 import 'models/chain_config_entity.dart';
+import 'v2/fuel_entity.dart';
+import 'v2/jump_entity.dart';
+import 'v2/scanned_object_entity.dart';
+import 'v2/ship_entity.dart';
 import 'v2/smart_assembly_state_enum.dart';
 import 'v2/smart_character_entity.dart';
 import 'models/contracts_entity.dart';
@@ -26,7 +31,6 @@ import 'routes/eip_entity.dart';
 import 'v1/erc_entity.dart';
 import 'routes/healthy_entity.dart';
 import 'routes/urls_entity.dart';
-import 'types/all_types_data_entity.dart';
 import 'types/attribute_entity.dart';
 import 'types/ephemeral_inventory_entity.dart';
 import 'types/fuel_module_entity.dart';
@@ -38,9 +42,7 @@ import 'types/metadata_entity.dart';
 import 'types/proximity_module_entity.dart';
 import 'v2/smart_assembly_entity.dart';
 import 'v2/smart_assembly_type_enum.dart';
-/* import 'types/smart_character_entity.dart'; */
 import 'v2/solar_system_entity.dart';
-import 'types/static_data_entity.dart';
 import 'v2/pagination_data_entity.dart';
 import 'v2/pagination_metadata_entry.dart';
 import 'v2/type_entity.dart';
@@ -64,7 +66,6 @@ export 'routes/eip_entity.dart';
 
 export 'routes/healthy_entity.dart';
 export 'routes/urls_entity.dart';
-export 'types/all_types_data_entity.dart';
 export 'types/attribute_entity.dart';
 export 'types/ephemeral_inventory_entity.dart';
 export 'types/fuel_module_entity.dart';
@@ -77,7 +78,6 @@ export 'types/proximity_module_entity.dart';
 export 'v2/smart_assembly_entity.dart';
 export 'v2/smart_assembly_type_enum.dart';
 export 'v2/solar_system_entity.dart';
-export 'types/static_data_entity.dart';
 export 'pod/pod_entry.dart';
 export 'pod/pod_value_entry.dart';
 export 'pod/pod_value_type_enum.dart';
@@ -90,13 +90,17 @@ export 'v2/pagination_metadata_entry.dart';
 export 'v2/pagination_data_entity.dart';
 export 'v2/smart_assembly_state_enum.dart';
 export 'v2/type_entity.dart';
+export 'v2/fuel_entity.dart';
+export 'v2/jump_entity.dart';
+export 'v2/ship_entity.dart';
+export 'v2/scan_entity.dart';
+export 'v2/scanned_object_entity.dart';
 
 part 'entities.g.dart';
 
 @SerializersFor([
   AddressConfigEntity,
   ChainConfigEntity,
-  /* SmartCharacterEntity, */
   ContractsEntity,
   ItemTypeIDsEntity,
   KillMailEntity,
@@ -112,8 +116,6 @@ part 'entities.g.dart';
   ErcEntity,
   HealthyEntity,
   UrlsEntity,
-  AllTypesDataEntity,
-  AllTypesDataAttributesEntity,
   AttributeEntity,
   AttributePropertiesEntity,
   EphemeralInventoryEntity,
@@ -130,21 +132,27 @@ part 'entities.g.dart';
   SmartAssemblyStateEnum,
   SmartCharacterEntity,
   SolarSystemEntity,
-  StaticDataEntity,
   PodEntity,
   PodValueEntity,
   PodValueTypeEnum,
   VerifyResponseEntry,
   PaginationMetadataEntry,
   TypeEntity,
+  FuelEntity,
+  JumpEntity,
+  ShipEntity,
+  ScanEntity,
+  ScannedObjectEntity,
 ])
 
 /// This is the main serializer for the entities in the app.
-final Serializers entititySerializers = (_$entititySerializers.toBuilder()
+final Serializers entitySerializers = (_$entitySerializers.toBuilder()
       ..addPlugin(StandardJsonPlugin())
       ..add(Iso8601DateTimeSerializer())
       ..add(Iso8601DurationSerializer())
-      ..add(PaginationDataEntitySerializer<KillMailEntity>())
+      ..add(PaginationDataEntitySerializer<TypeEntity>())
+      ..add(PaginationDataEntitySerializer<SmartCharacterEntity>())
       ..add(PaginationDataEntitySerializer<SmartAssemblyEntity>())
-      ..add(PaginationDataEntitySerializer<SmartCharacterEntity>()))
+      ..add(PaginationDataEntitySerializer<KillMailEntity>())
+      ..add(PaginationDataEntitySerializer<SolarSystemEntity>()))
     .build();

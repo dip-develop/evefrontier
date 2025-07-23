@@ -43,13 +43,17 @@ class _$SmartAssemblyEntitySerializer
       'type',
       serializers.serialize(object.type,
           specifiedType: const FullType(SmartAssemblyTypeEnum)),
-      'typeDetails',
-      serializers.serialize(object.typeDetails,
-          specifiedType: const FullType(TypeEntity)),
       'typeId',
       serializers.serialize(object.typeId, specifiedType: const FullType(int)),
     ];
-
+    Object? value;
+    value = object.typeDetails;
+    if (value != null) {
+      result
+        ..add('typeDetails')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(TypeEntity)));
+    }
     return result;
   }
 
@@ -128,7 +132,7 @@ class _$SmartAssemblyEntity extends SmartAssemblyEntity {
   @override
   final SmartAssemblyTypeEnum type;
   @override
-  final TypeEntity typeDetails;
+  final TypeEntity? typeDetails;
   @override
   final int typeId;
 
@@ -144,7 +148,7 @@ class _$SmartAssemblyEntity extends SmartAssemblyEntity {
       required this.solarSystem,
       required this.state,
       required this.type,
-      required this.typeDetails,
+      this.typeDetails,
       required this.typeId})
       : super._();
   @override
@@ -260,7 +264,7 @@ class SmartAssemblyEntityBuilder
       _solarSystem = $v.solarSystem.toBuilder();
       _state = $v.state;
       _type = $v.type;
-      _typeDetails = $v.typeDetails.toBuilder();
+      _typeDetails = $v.typeDetails?.toBuilder();
       _typeId = $v.typeId;
       _$v = null;
     }
@@ -297,7 +301,7 @@ class SmartAssemblyEntityBuilder
                 state, r'SmartAssemblyEntity', 'state'),
             type: BuiltValueNullFieldError.checkNotNull(
                 type, r'SmartAssemblyEntity', 'type'),
-            typeDetails: typeDetails.build(),
+            typeDetails: _typeDetails?.build(),
             typeId: BuiltValueNullFieldError.checkNotNull(
                 typeId, r'SmartAssemblyEntity', 'typeId'),
           );
@@ -310,7 +314,7 @@ class SmartAssemblyEntityBuilder
         solarSystem.build();
 
         _$failedField = 'typeDetails';
-        typeDetails.build();
+        _typeDetails?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
             r'SmartAssemblyEntity', _$failedField, e.toString());

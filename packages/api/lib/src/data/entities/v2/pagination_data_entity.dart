@@ -6,7 +6,7 @@ import '../entities.dart';
 
 part 'pagination_data_entity.g.dart';
 
-/// This class represents a kill mail entity in the game EVE Frontier.
+/// This class represents a pagination data entity in the game EVE Frontier.
 abstract class PaginationDataEntity<T>
     implements Built<PaginationDataEntity<T>, PaginationDataEntityBuilder<T>> {
   BuiltList<T> get data;
@@ -25,13 +25,22 @@ abstract class PaginationDataEntity<T>
 class PaginationDataEntitySerializer<T>
     implements StructuredSerializer<PaginationDataEntity<T>> {
   @override
-  final Iterable<Type> types = const [
-    PaginationDataEntity,
-    _$PaginationDataEntity
-  ];
+  String get wireName => 'PaginationDataEntity<${_getTypeName()}>';
 
   @override
-  final String wireName = T.toString();
+  final Iterable<Type> types = [
+    PaginationDataEntity<T>,
+    _$PaginationDataEntity<T>
+  ];
+
+  String _getTypeName() {
+    if (T == SmartCharacterEntity) return 'SmartCharacterEntity';
+    if (T == SmartAssemblyEntity) return 'SmartAssemblyEntity';
+    if (T == KillMailEntity) return 'KillMailEntity';
+    if (T == TypeEntity) return 'TypeEntity';
+    if (T == SolarSystemEntity) return 'SolarSystemEntity';
+    return T.toString();
+  }
 
   @override
   Iterable<Object?> serialize(
@@ -79,6 +88,10 @@ class PaginationDataEntitySerializer<T>
       return serializers.serializeWith(SmartAssemblyEntity.serializer, data);
     } else if (data is KillMailEntity) {
       return serializers.serializeWith(KillMailEntity.serializer, data);
+    } else if (data is TypeEntity) {
+      return serializers.serializeWith(TypeEntity.serializer, data);
+    } else if (data is SolarSystemEntity) {
+      return serializers.serializeWith(SolarSystemEntity.serializer, data);
     } else {
       throw UnsupportedError('Unsupported data type: ${data.runtimeType}');
     }
@@ -96,27 +109,44 @@ class PaginationDataEntitySerializer<T>
         T? deserializedItem;
 
         try {
-          final character = serializers.deserializeWith(
+          final data = serializers.deserializeWith(
               SmartCharacterEntity.serializer, item);
-          if (character != null) {
-            deserializedItem = character as T;
+          if (data != null) {
+            deserializedItem = data as T;
           }
         } catch (_) {
           try {
-            final assembly = serializers.deserializeWith(
+            final data = serializers.deserializeWith(
                 SmartAssemblyEntity.serializer, item);
-            if (assembly != null) {
-              deserializedItem = assembly as T;
+            if (data != null) {
+              deserializedItem = data as T;
             }
           } catch (_) {
             try {
-              final killMail =
+              final data =
                   serializers.deserializeWith(KillMailEntity.serializer, item);
-              if (killMail != null) {
-                deserializedItem = killMail as T;
+              if (data != null) {
+                deserializedItem = data as T;
               }
             } catch (_) {
-              throw UnsupportedError('Cannot determine data type from: $value');
+              try {
+                final data =
+                    serializers.deserializeWith(TypeEntity.serializer, item);
+                if (data != null) {
+                  deserializedItem = data as T;
+                }
+              } catch (_) {
+                try {
+                  final data = serializers.deserializeWith(
+                      SolarSystemEntity.serializer, item);
+                  if (data != null) {
+                    deserializedItem = data as T;
+                  }
+                } catch (_) {
+                  throw UnsupportedError(
+                      'Cannot determine data type from: $value');
+                }
+              }
             }
           }
         }

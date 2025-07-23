@@ -12,11 +12,11 @@ abstract class PodValueEntity
   static Serializer<PodValueEntity> get serializer =>
       _$podValueEntitySerializer;
 
-  int get bigVal;
-  bool get boolVal;
-  BuiltList<int> get bytesVal;
-  String get stringVal;
-  String get timeVal;
+  int? get bigVal;
+  bool? get boolVal;
+  BuiltList<int>? get bytesVal;
+  String? get stringVal;
+  DateTime? get timeVal;
   PodValueTypeEnum get valueType;
 
   PodValueEntity._();

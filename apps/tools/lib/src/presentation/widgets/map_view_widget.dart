@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
 class MapViewWidget extends StatefulWidget {
-  final BuiltMap<String, SolarSystemEntity> solarSystems;
+  final BuiltList<SolarSystemEntity> solarSystems;
 
   const MapViewWidget({super.key, required this.solarSystems});
 
@@ -63,7 +63,7 @@ class _MapViewWidgetState extends State<MapViewWidget> {
           child: CustomPaint(
             size: Size.infinite,
             painter: _SolarSystemPainter(
-              solarSystems: widget.solarSystems.values.toList(),
+              solarSystems: widget.solarSystems.toList(),
               rotation: rotation,
               zoom: zoom,
               focalPoint: focalPoint,
@@ -100,15 +100,14 @@ class _SolarSystemPainter extends CustomPainter {
 
     final center = _calculateCenter(solarSystems);
 
-    final matrix =
-        Matrix4.identity()
-          ..translate(screenCenter.dx, screenCenter.dy, 500)
-          ..scale(zoom)
-          ..rotateX(rotation.x)
-          ..rotateY(rotation.y)
-          ..setEntry(3, 2, 0.001)
-          /* ..translate(-focalPoint.dx, -focalPoint.dy) */
-          ..translate(-center.x * 1e-18, -center.y * 1e-18);
+    final matrix = Matrix4.identity()
+      ..translate(screenCenter.dx, screenCenter.dy, 500)
+      ..scale(zoom)
+      ..rotateX(rotation.x)
+      ..rotateY(rotation.y)
+      ..setEntry(3, 2, 0.001)
+      /* ..translate(-focalPoint.dx, -focalPoint.dy) */
+      ..translate(-center.x * 1e-18, -center.y * 1e-18);
 
     for (var system in solarSystems) {
       final transformed = matrix.transformed3(

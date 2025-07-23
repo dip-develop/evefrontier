@@ -12,8 +12,7 @@ class MapScrean extends StatefulWidget {
 
 class _MapScreanState extends State<MapScrean> {
   final _api = EVEFrontierAPI();
-  BuiltMap<String, SolarSystemEntity> _solarSystems =
-      BuiltMap<String, SolarSystemEntity>();
+  BuiltList<SolarSystemEntity> _solarSystems = BuiltList<SolarSystemEntity>();
 
   @override
   void initState() {
@@ -22,10 +21,10 @@ class _MapScreanState extends State<MapScrean> {
   }
 
   void _loadSolarSystems() => _api.getSolarSystems().then(
-    (value) => setState(() {
-      _solarSystems = BuiltMap<String, SolarSystemEntity>.from(value.toMap());
-    }),
-  );
+        (value) => setState(() {
+          _solarSystems = value.data;
+        }),
+      );
 
   @override
   Widget build(BuildContext context) {

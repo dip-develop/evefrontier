@@ -2,43 +2,249 @@ import 'package:built_collection/built_collection.dart';
 
 import '../../data/entities/entities.dart';
 
+/// RestRepo defines the contract for REST API operations in EVE Frontier World API.
+///
+/// This repository interface abstracts all HTTP operations and provides a clean
+/// separation between the domain layer and data layer. It organizes endpoints
+/// into three main categories:
+/// - Chain operations: Blockchain-related data and transactions
+/// - Game operations: Game-specific data like jumps, scans, and types
+/// - Meta operations: API configuration, health checks, and POD verification
+///
+/// All methods return domain entities rather than raw HTTP responses,
+/// ensuring clean architecture principles.
 abstract interface class RestRepo {
-  // Chain REST
-  //
-  // Submit a meta transaction
-  // Only bringOnline, bringOffline and setEntityMetadata are allowed
+  ///
+  /// Chain REST Operations
+  ///
+  /// These methods interact with blockchain data and smart contracts,
+  /// handling player-generated content and on-chain assets.
+  ///
+
+  /// Submits a meta transaction to the blockchain
+  ///
+  /// Meta transactions enable gasless operations where a relayer pays gas fees.
+  /// Only specific operations are permitted: bringOnline, bringOffline, and setEntityMetadata.
+  ///
+  /// Parameters:
+  /// - [erc]: ERC2771 meta transaction data including signature and transaction details
+  ///
+  /// Throws exceptions on invalid transaction data or blockchain errors.
   Future<void> metaTransaction(ErcEntity erc);
-  // Get a list all the kill mails reported by players
+
+  /// Retrieves all kill mails reported by players
+  ///
+  /// Kill mails document player vs player combat events stored on the blockchain.
+  /// Results are paginated for performance optimization.
+  ///
+  /// Parameters:
+  /// - [limit]: Maximum number of kill mails to return (optional, 0-100)
+  /// - [offset]: Number of kill mails to skip for pagination (optional)
+  ///
+  /// Returns paginated collection of kill mail entities with metadata.
   Future<PaginationDataEntity<KillMailEntity>> getKillMails(
       {int? limit, int? offset});
-  // Get a the kill mail report
+
+  /// Retrieves a specific kill mail report by ID
+  ///
+  /// Parameters:
+  /// - [id]: Unique kill mail identifier
+  ///
+  /// Returns detailed kill mail information including killer, victim, location, and timestamp.
+  /// Throws exception if kill mail is not found.
   Future<KillMailEntity> getKillMail(String id);
-  // Get a list all the smart assemblies currently in the world
+
+  /// Retrieves all smart assemblies currently deployed in the world
+  ///
+  /// Smart assemblies are player-deployable structures including gates, storage units,
+  /// turrets, and other functional buildings in the EVE Frontier universe.
+  ///
+  /// Parameters:
+  /// - [limit]: Maximum number of assemblies to return (optional, 0-100)
+  /// - [offset]: Number of assemblies to skip for pagination (optional)
+  ///
+  /// Returns paginated collection of smart assembly entities with operational data.
   Future<PaginationDataEntity<SmartAssemblyEntity>> getSmartAssemblies(
       {int? limit, int? offset});
-  // Retrieve one smart assembly with the given [id]
+
+  /// Retrieves detailed information about a specific smart assembly
+  ///
+  /// Parameters:
+  /// - [id]: Unique smart assembly identifier (large integer as string)
+  ///
+  /// Returns comprehensive assembly details including type-specific data,
+  /// ownership, location, and operational status.
+  /// Throws exception if assembly is not found.
   Future<SmartAssemblyEntity> getSmartAssemblie(String id);
-  // Get a list all the smart characters currently in the world
+
+  /// Retrieves all smart characters currently active in the world
+  ///
+  /// Smart characters represent player avatars with blockchain addresses
+  /// and associated in-game assets.
+  ///
+  /// Parameters:
+  /// - [limit]: Maximum number of characters to return (optional, 0-100)
+  /// - [offset]: Number of characters to skip for pagination (optional)
+  ///
+  /// Returns paginated collection of smart character entities.
   Future<PaginationDataEntity<SmartCharacterEntity>> getSmartCharacters(
       {int? limit, int? offset});
-  // Retrieve one smart character with the given [id]
+
+  /// Retrieves detailed information about a specific smart character
+  ///
+  /// Parameters:
+  /// - [id]: Character blockchain address in hex format (e.g., "0x7578ca43...")
+  ///
+  /// Returns comprehensive character details including balances, assets,
+  /// and tribe membership information.
+  /// Throws exception if character is not found or address is invalid.
   Future<SmartCharacterEntity> getSmartCharacter(String id);
-  // Game REST
-  //
-  // Get a list all the solar systems currently in the application
-  Future<BuiltMap<String, SolarSystemEntity>> getSolarSystems();
-  // Get a list all the types used in the world
-  Future<AllTypesDataEntity> getTypes();
-  // Get info about a single game type with the given [id]
-  Future<StaticDataEntity> getType(String id);
-  // Meta REST
-  //
-  // Retrieve the world contracts ABIs with some config
+
+  ///
+  /// Game REST Operations
+  ///
+  /// These methods provide access to game-specific data including
+  /// fuel information, player activities, and world configuration.
+  ///
+
+  /// Retrieves all available fuels for smart assemblies
+  ///
+  /// Fuels power various smart assemblies and have different efficiency ratings.
+  ///
+  /// Parameters:
+  /// - [limit]: Maximum number of fuels to return (optional)
+  /// - [offset]: Number of fuels to skip for pagination (optional)
+  ///
+  /// Returns paginated collection of fuel entities with efficiency data.
+  Future<PaginationDataEntity<FuelEntity>> getFuels({int? limit, int? offset});
+
+  /// Retrieves jump history for the authenticated user's smart character
+  ///
+  /// **Requires Authentication**: User must be authenticated to access personal jump data.
+  ///
+  /// Parameters:
+  /// - [limit]: Maximum number of jumps to return (optional)
+  /// - [offset]: Number of jumps to skip for pagination (optional)
+  ///
+  /// Returns paginated collection of jump entities with destination and timing data.
+  Future<PaginationDataEntity<JumpEntity>> getJumps({int? limit, int? offset});
+
+  /// Retrieves a specific jump by ID for the authenticated user
+  ///
+  /// **Requires Authentication**: User must be authenticated to access personal jump data.
+  ///
+  /// Parameters:
+  /// - [id]: Jump identifier (typically UNIX timestamp)
+  ///
+  /// Returns detailed jump information including ship, route, and timing data.
+  /// Throws exception if jump is not found or user lacks access.
+  Future<JumpEntity> getJump(String id);
+
+  /// Retrieves scan history for the authenticated user's smart character
+  ///
+  /// **Requires Authentication**: User must be authenticated to access personal scan data.
+  /// **Note**: Currently returns mocked data for development purposes.
+  ///
+  /// Parameters:
+  /// - [limit]: Maximum number of scans to return (optional)
+  /// - [offset]: Number of scans to skip for pagination (optional)
+  ///
+  /// Returns paginated collection of scan entities with object and location data.
+  Future<PaginationDataEntity<ScanEntity>> getScans({int? limit, int? offset});
+
+  /// Retrieves a specific scan by ID for the authenticated user
+  ///
+  /// **Requires Authentication**: User must be authenticated to access personal scan data.
+  /// **Note**: Currently returns mocked data for development purposes.
+  ///
+  /// Parameters:
+  /// - [id]: Scan identifier
+  ///
+  /// Returns detailed scan information including scanned object properties.
+  /// Throws exception if scan is not found or user lacks access.
+  Future<ScanEntity> getScan(String id);
+
+  /// Retrieves all solar systems currently available in the game
+  ///
+  /// Solar systems represent locations in the EVE Frontier universe where
+  /// players can deploy assemblies and conduct activities.
+  ///
+  /// Returns paginated collection of solar system entities with location data.
+  /// Supports up to 1000 systems per request.
+  Future<PaginationDataEntity<SolarSystemEntity>> getSolarSystems();
+
+  /// Retrieves detailed information about a specific solar system
+  ///
+  /// Parameters:
+  /// - [id]: Solar System ID (example: "30000001")
+  ///
+  /// Returns comprehensive solar system information including location,
+  /// region details, and associated smart assemblies.
+  /// Throws exception if solar system is not found.
+  Future<SolarSystemEntity> getSolarSystem(String id);
+
+  /// Retrieves all game types used in the EVE Frontier world
+  ///
+  /// Types define the properties and behaviors of various game objects
+  /// including ships, items, assemblies, and other entities.
+  ///
+  /// Returns paginated collection of type entities with detailed properties.
+  /// Supports up to 1000 types per request.
+  Future<PaginationDataEntity<TypeEntity>> getTypes();
+
+  /// Retrieves detailed information about a specific game type
+  ///
+  /// Parameters:
+  /// - [id]: Game type identifier
+  ///
+  /// Returns comprehensive type information including physical properties,
+  /// category classification, and visual assets.
+  /// Throws exception if type is not found.
+  Future<TypeEntity> getType(String id);
+
+  ///
+  /// Meta REST Operations
+  ///
+  /// These methods provide API configuration, health monitoring,
+  /// and cryptographic verification services.
+  ///
+
+  /// Retrieves world contracts ABIs along with configuration data
+  ///
+  /// ABIs (Application Binary Interfaces) define how to interact with
+  /// smart contracts deployed in the EVE Frontier world.
+  ///
+  /// Returns configuration entity containing contract ABIs, exchange rates,
+  /// system IDs, and dApp URLs required for blockchain integration.
   Future<AbiConfigEntity> getABISConfig();
-  // Retrieve all the config needed to connect to our services
+
+  /// Retrieves comprehensive configuration for connecting to EVE Frontier services
+  ///
+  /// Provides all necessary connection details including RPC endpoints,
+  /// contract addresses, API URLs, and cryptographic keys.
+  ///
+  /// Returns list of chain configuration entities for different networks
+  /// and environments, enabling multi-chain support.
   Future<BuiltList<ChainConfigEntity>> getConfig();
-  // Tells you if the World API is ok
+
+  /// Performs health check on the World API
+  ///
+  /// Used for monitoring and service availability verification.
+  /// Should be called periodically to ensure API responsiveness.
+  ///
+  /// Returns health status entity indicating API operational state.
+  /// Throws exception if API is not responding properly.
   Future<HealthyEntity> getHealth();
-  // Verify a Provable Object Datatype object
+
+  /// Verifies a POD (Provable Object Datatype) object
+  ///
+  /// PODs are cryptographically signed data structures that enable
+  /// verifiable off-chain data with on-chain verification capabilities.
+  ///
+  /// Parameters:
+  /// - [pod]: POD entity containing data entries, signature, and public key
+  ///
+  /// Returns verification response indicating validity and any error details.
+  /// Used for ensuring data integrity in decentralized applications.
   Future<VerifyResponseEntry> verifyPod(PodEntity pod);
 }

@@ -18,7 +18,7 @@ abstract class SmartAssemblyEntity
   SolarSystemEntity get solarSystem;
   SmartAssemblyStateEnum get state;
   SmartAssemblyTypeEnum get type;
-  TypeEntity get typeDetails;
+  TypeEntity? get typeDetails;
 
   int get typeId;
 

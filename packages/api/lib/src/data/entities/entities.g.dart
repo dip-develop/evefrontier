@@ -6,14 +6,12 @@ part of 'entities.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$entititySerializers = (Serializers().toBuilder()
+Serializers _$entitySerializers = (Serializers().toBuilder()
       ..add(AbiCfgEntity.serializer)
       ..add(AbiConfigEntity.serializer)
       ..add(AbiEntity.serializer)
       ..add(AbiProportiesEntity.serializer)
       ..add(AddressConfigEntity.serializer)
-      ..add(AllTypesDataAttributesEntity.serializer)
-      ..add(AllTypesDataEntity.serializer)
       ..add(AttributeEntity.serializer)
       ..add(AttributePropertiesEntity.serializer)
       ..add(ChainConfigEntity.serializer)
@@ -21,12 +19,14 @@ Serializers _$entititySerializers = (Serializers().toBuilder()
       ..add(EipEntity.serializer)
       ..add(EphemeralInventoryEntity.serializer)
       ..add(ErcEntity.serializer)
+      ..add(FuelEntity.serializer)
       ..add(FuelModuleEntity.serializer)
       ..add(GateLinkModuleEntity.serializer)
       ..add(HealthyEntity.serializer)
       ..add(InventoryItemEntity.serializer)
       ..add(InventoryModuleEntity.serializer)
       ..add(ItemTypeIDsEntity.serializer)
+      ..add(JumpEntity.serializer)
       ..add(KillMailEntity.serializer)
       ..add(LocationEntity.serializer)
       ..add(LossTypeEnum.serializer)
@@ -39,12 +39,14 @@ Serializers _$entititySerializers = (Serializers().toBuilder()
       ..add(ProximityModuleEntity.serializer)
       ..add(RpcEntity.serializer)
       ..add(RpcUrlsEntity.serializer)
+      ..add(ScanEntity.serializer)
+      ..add(ScannedObjectEntity.serializer)
+      ..add(ShipEntity.serializer)
       ..add(SmartAssemblyEntity.serializer)
       ..add(SmartAssemblyStateEnum.serializer)
       ..add(SmartAssemblyTypeEnum.serializer)
       ..add(SmartCharacterEntity.serializer)
       ..add(SolarSystemEntity.serializer)
-      ..add(StaticDataEntity.serializer)
       ..add(SystemIdsEntity.serializer)
       ..add(TypeEntity.serializer)
       ..add(UrlsEntity.serializer)
@@ -67,10 +69,6 @@ Serializers _$entititySerializers = (Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType(AbiProportiesEntity)]),
           () => ListBuilder<AbiProportiesEntity>())
-      ..addBuilderFactory(
-          const FullType(
-              BuiltList, const [const FullType(AllTypesDataAttributesEntity)]),
-          () => ListBuilder<AllTypesDataAttributesEntity>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(AttributeEntity)]),
           () => ListBuilder<AttributeEntity>())

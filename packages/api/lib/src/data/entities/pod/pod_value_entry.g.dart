@@ -20,26 +20,46 @@ class _$PodValueEntitySerializer
   Iterable<Object?> serialize(Serializers serializers, PodValueEntity object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'bigVal',
-      serializers.serialize(object.bigVal, specifiedType: const FullType(int)),
-      'boolVal',
-      serializers.serialize(object.boolVal,
-          specifiedType: const FullType(bool)),
-      'bytesVal',
-      serializers.serialize(object.bytesVal,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(int)])),
-      'stringVal',
-      serializers.serialize(object.stringVal,
-          specifiedType: const FullType(String)),
-      'timeVal',
-      serializers.serialize(object.timeVal,
-          specifiedType: const FullType(String)),
       'valueType',
       serializers.serialize(object.valueType,
           specifiedType: const FullType(PodValueTypeEnum)),
     ];
-
+    Object? value;
+    value = object.bigVal;
+    if (value != null) {
+      result
+        ..add('bigVal')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.boolVal;
+    if (value != null) {
+      result
+        ..add('boolVal')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.bytesVal;
+    if (value != null) {
+      result
+        ..add('bytesVal')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(int)])));
+    }
+    value = object.stringVal;
+    if (value != null) {
+      result
+        ..add('stringVal')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.timeVal;
+    if (value != null) {
+      result
+        ..add('timeVal')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     return result;
   }
 
@@ -57,11 +77,11 @@ class _$PodValueEntitySerializer
       switch (key) {
         case 'bigVal':
           result.bigVal = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'boolVal':
           result.boolVal = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'bytesVal':
           result.bytesVal.replace(serializers.deserialize(value,
@@ -71,11 +91,11 @@ class _$PodValueEntitySerializer
           break;
         case 'stringVal':
           result.stringVal = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'timeVal':
           result.timeVal = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'valueType':
           result.valueType = serializers.deserialize(value,
@@ -91,15 +111,15 @@ class _$PodValueEntitySerializer
 
 class _$PodValueEntity extends PodValueEntity {
   @override
-  final int bigVal;
+  final int? bigVal;
   @override
-  final bool boolVal;
+  final bool? boolVal;
   @override
-  final BuiltList<int> bytesVal;
+  final BuiltList<int>? bytesVal;
   @override
-  final String stringVal;
+  final String? stringVal;
   @override
-  final String timeVal;
+  final DateTime? timeVal;
   @override
   final PodValueTypeEnum valueType;
 
@@ -107,11 +127,11 @@ class _$PodValueEntity extends PodValueEntity {
       (PodValueEntityBuilder()..update(updates))._build();
 
   _$PodValueEntity._(
-      {required this.bigVal,
-      required this.boolVal,
-      required this.bytesVal,
-      required this.stringVal,
-      required this.timeVal,
+      {this.bigVal,
+      this.boolVal,
+      this.bytesVal,
+      this.stringVal,
+      this.timeVal,
       required this.valueType})
       : super._();
   @override
@@ -179,9 +199,9 @@ class PodValueEntityBuilder
   String? get stringVal => _$this._stringVal;
   set stringVal(String? stringVal) => _$this._stringVal = stringVal;
 
-  String? _timeVal;
-  String? get timeVal => _$this._timeVal;
-  set timeVal(String? timeVal) => _$this._timeVal = timeVal;
+  DateTime? _timeVal;
+  DateTime? get timeVal => _$this._timeVal;
+  set timeVal(DateTime? timeVal) => _$this._timeVal = timeVal;
 
   PodValueTypeEnum? _valueType;
   PodValueTypeEnum? get valueType => _$this._valueType;
@@ -194,7 +214,7 @@ class PodValueEntityBuilder
     if ($v != null) {
       _bigVal = $v.bigVal;
       _boolVal = $v.boolVal;
-      _bytesVal = $v.bytesVal.toBuilder();
+      _bytesVal = $v.bytesVal?.toBuilder();
       _stringVal = $v.stringVal;
       _timeVal = $v.timeVal;
       _valueType = $v.valueType;
@@ -221,15 +241,11 @@ class PodValueEntityBuilder
     try {
       _$result = _$v ??
           _$PodValueEntity._(
-            bigVal: BuiltValueNullFieldError.checkNotNull(
-                bigVal, r'PodValueEntity', 'bigVal'),
-            boolVal: BuiltValueNullFieldError.checkNotNull(
-                boolVal, r'PodValueEntity', 'boolVal'),
-            bytesVal: bytesVal.build(),
-            stringVal: BuiltValueNullFieldError.checkNotNull(
-                stringVal, r'PodValueEntity', 'stringVal'),
-            timeVal: BuiltValueNullFieldError.checkNotNull(
-                timeVal, r'PodValueEntity', 'timeVal'),
+            bigVal: bigVal,
+            boolVal: boolVal,
+            bytesVal: _bytesVal?.build(),
+            stringVal: stringVal,
+            timeVal: timeVal,
             valueType: BuiltValueNullFieldError.checkNotNull(
                 valueType, r'PodValueEntity', 'valueType'),
           );
@@ -237,7 +253,7 @@ class PodValueEntityBuilder
       late String _$failedField;
       try {
         _$failedField = 'bytesVal';
-        bytesVal.build();
+        _bytesVal?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
             r'PodValueEntity', _$failedField, e.toString());

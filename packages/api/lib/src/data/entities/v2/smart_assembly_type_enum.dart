@@ -15,6 +15,16 @@ class SmartAssemblyTypeEnum extends EnumClass {
   static const SmartAssemblyTypeEnum smartTurret = _$smartTurret;
   @BuiltValueEnumConst(wireName: 'SmartGate')
   static const SmartAssemblyTypeEnum smartGate = _$smartGate;
+
+  @BuiltValueEnumConst(wireName: 'NetworkNode')
+  static const SmartAssemblyTypeEnum networkNode = _$networkNode;
+  @BuiltValueEnumConst(wireName: 'Refinery')
+  static const SmartAssemblyTypeEnum refinery = _$refinery;
+  @BuiltValueEnumConst(wireName: 'Manufacturing')
+  static const SmartAssemblyTypeEnum manufacturing = _$manufacturing;
+  @BuiltValueEnumConst(wireName: 'SmartHangar')
+  static const SmartAssemblyTypeEnum smartHangar = _$smartHangar;
+
   @BuiltValueEnumConst(wireName: 'Unknown')
   static const SmartAssemblyTypeEnum unknown = _$unknown;
 

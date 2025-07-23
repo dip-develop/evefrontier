@@ -12,6 +12,14 @@ const SmartAssemblyTypeEnum _$smartTurret =
     const SmartAssemblyTypeEnum._('smartTurret');
 const SmartAssemblyTypeEnum _$smartGate =
     const SmartAssemblyTypeEnum._('smartGate');
+const SmartAssemblyTypeEnum _$networkNode =
+    const SmartAssemblyTypeEnum._('networkNode');
+const SmartAssemblyTypeEnum _$refinery =
+    const SmartAssemblyTypeEnum._('refinery');
+const SmartAssemblyTypeEnum _$manufacturing =
+    const SmartAssemblyTypeEnum._('manufacturing');
+const SmartAssemblyTypeEnum _$smartHangar =
+    const SmartAssemblyTypeEnum._('smartHangar');
 const SmartAssemblyTypeEnum _$unknown =
     const SmartAssemblyTypeEnum._('unknown');
 
@@ -23,6 +31,14 @@ SmartAssemblyTypeEnum _$valueOf(String name) {
       return _$smartTurret;
     case 'smartGate':
       return _$smartGate;
+    case 'networkNode':
+      return _$networkNode;
+    case 'refinery':
+      return _$refinery;
+    case 'manufacturing':
+      return _$manufacturing;
+    case 'smartHangar':
+      return _$smartHangar;
     case 'unknown':
       return _$unknown;
     default:
@@ -35,6 +51,10 @@ final BuiltSet<SmartAssemblyTypeEnum> _$values =
   _$smartStorageUnit,
   _$smartTurret,
   _$smartGate,
+  _$networkNode,
+  _$refinery,
+  _$manufacturing,
+  _$smartHangar,
   _$unknown,
 ]);
 
@@ -47,12 +67,20 @@ class _$SmartAssemblyTypeEnumSerializer
     'smartStorageUnit': 'SmartStorageUnit',
     'smartTurret': 'SmartTurret',
     'smartGate': 'SmartGate',
+    'networkNode': 'NetworkNode',
+    'refinery': 'Refinery',
+    'manufacturing': 'Manufacturing',
+    'smartHangar': 'SmartHangar',
     'unknown': 'Unknown',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'SmartStorageUnit': 'smartStorageUnit',
     'SmartTurret': 'smartTurret',
     'SmartGate': 'smartGate',
+    'NetworkNode': 'networkNode',
+    'Refinery': 'refinery',
+    'Manufacturing': 'manufacturing',
+    'SmartHangar': 'smartHangar',
     'Unknown': 'unknown',
   };
 
