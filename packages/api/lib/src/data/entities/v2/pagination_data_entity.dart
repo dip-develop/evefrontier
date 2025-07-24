@@ -39,6 +39,9 @@ class PaginationDataEntitySerializer<T>
     if (T == KillMailEntity) return 'KillMailEntity';
     if (T == TypeEntity) return 'TypeEntity';
     if (T == SolarSystemEntity) return 'SolarSystemEntity';
+    if (T == FuelEntity) return 'FuelEntity';
+    if (T == ScanEntity) return 'ScanEntity';
+    if (T == JumpEntity) return 'JumpEntity';
     return T.toString();
   }
 
@@ -92,6 +95,12 @@ class PaginationDataEntitySerializer<T>
       return serializers.serializeWith(TypeEntity.serializer, data);
     } else if (data is SolarSystemEntity) {
       return serializers.serializeWith(SolarSystemEntity.serializer, data);
+    } else if (data is FuelEntity) {
+      return serializers.serializeWith(FuelEntity.serializer, data);
+    } else if (data is ScanEntity) {
+      return serializers.serializeWith(ScanEntity.serializer, data);
+    } else if (data is JumpEntity) {
+      return serializers.serializeWith(JumpEntity.serializer, data);
     } else {
       throw UnsupportedError('Unsupported data type: ${data.runtimeType}');
     }
@@ -143,8 +152,32 @@ class PaginationDataEntitySerializer<T>
                     deserializedItem = data as T;
                   }
                 } catch (_) {
-                  throw UnsupportedError(
-                      'Cannot determine data type from: $value');
+                  try {
+                    final data = serializers.deserializeWith(
+                        FuelEntity.serializer, item);
+                    if (data != null) {
+                      deserializedItem = data as T;
+                    }
+                  } catch (_) {
+                    try {
+                      final data = serializers.deserializeWith(
+                          ScanEntity.serializer, item);
+                      if (data != null) {
+                        deserializedItem = data as T;
+                      }
+                    } catch (_) {
+                      try {
+                        final data = serializers.deserializeWith(
+                            JumpEntity.serializer, item);
+                        if (data != null) {
+                          deserializedItem = data as T;
+                        }
+                      } catch (_) {
+                        throw UnsupportedError(
+                            'Cannot determine data type from: $value');
+                      }
+                    }
+                  }
                 }
               }
             }

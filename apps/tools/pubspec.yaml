@@ -17,16 +17,21 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   collection: ^1.19.1
-  built_value: ^8.9.5
+  built_value: ^8.11.0
   built_collection: ^5.1.1
   evefrontier_api:
     path: ../../packages/api
-  vector_math: ^2.1.4
+  vector_math: ^2.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
+
+dependency_overrides:
+  vector_math: ^2.2.0
+  source_gen: ^3.0.0
+  build: ^3.0.0
 
 flutter:
   uses-material-design: true

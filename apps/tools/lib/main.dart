@@ -1,4 +1,4 @@
-import 'package:evefrontier_tools/src/presentation/screens/map_screen.dart';
+import 'src/presentation/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'EVE Frontier Tools',
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.deepPurple),
-
       home: const MapScrean(),
     );
   }

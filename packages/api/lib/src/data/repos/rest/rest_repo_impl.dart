@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:chopper/chopper.dart';
@@ -43,13 +44,18 @@ class RestRepoImpl implements RestRepo {
   ///
   /// Sets up:
   /// - Base URL pointing to EVE Frontier World API
+  /// - Bearer token authentication for protected endpoints
   /// - BuiltValue converter for automatic JSON serialization/deserialization
   /// - All three service instances (Meta, Game, Chain)
   /// - Request interceptors for common headers and logging
   ///
+  /// Parameters:
+  /// - [bearerToken]: Optional authentication token for accessing protected endpoints.
+  ///   When provided, automatically adds Authorization header to all requests.
+  ///
   /// The client is configured to handle entity serialization automatically
   /// and includes HTTP logging for development and debugging purposes.
-  RestRepoImpl() {
+  RestRepoImpl({String? bearerToken}) {
     final client = ChopperClient(
       // EVE Frontier World API base URL for all requests
       baseUrl:
@@ -66,7 +72,9 @@ class RestRepoImpl implements RestRepo {
       ],
       // Request interceptors for common functionality
       interceptors: [
-        _RestRequestInterceptor(), // Adds standard headers
+        _RestRequestInterceptor(
+            bearerToken:
+                bearerToken), // Adds standard headers and authentication
         HttpLoggingInterceptor(), // Logs HTTP requests/responses
       ],
     );
@@ -94,12 +102,22 @@ class RestRepoImpl implements RestRepo {
   Future<HealthyEntity> getHealth() => _meta.getHealth().then(_getData);
 
   @override
-  Future<VerifyResponseEntry> verifyPod(PodEntity pod) =>
-      _meta.verifyPod(pod).then(_getData).catchError((error) {
-        return error is Exception
-            ? Future<VerifyResponseEntry>.error(error)
-            : Future<VerifyResponseEntry>.error(Exception('Unknown error'));
-      });
+  Future<VerifyResponseEntry> verifyPod(PodEntity pod) async {
+    final response = await _meta.verifyPod(pod);
+    if (response.isSuccessful) {
+      return _getData(response);
+    } else {
+      if (response.statusCode == 400) {
+        final verifyResponse = entitySerializers.deserializeWith(
+            VerifyResponseEntry.serializer, jsonDecode(response.bodyString));
+        if (verifyResponse != null) {
+          return verifyResponse;
+        }
+      }
+      return Future<VerifyResponseEntry>.error(
+          Exception('Invalid POD data: ${response.error}'));
+    }
+  }
 
   //
   // Game Service Operations
@@ -190,9 +208,9 @@ class RestRepoImpl implements RestRepo {
   /// - [response]: HTTP response wrapper containing status and body data
   ///
   /// Returns the response body for successful requests, or throws an exception for errors.
-  FutureOr<T> _getData<T>(Response<T> response) {
+  Future<T> _getData<T>(Response<T> response) {
     if (response.isSuccessful) {
-      return response.body!;
+      return Future<T>.value(response.body!);
     }
     return Future<T>.error(Exception(response.error));
   }
@@ -202,16 +220,32 @@ class RestRepoImpl implements RestRepo {
 ///
 /// This interceptor ensures consistent request formatting by automatically adding:
 /// - Accept header with 'application/json' to indicate expected response format
+/// - Authorization header with bearer token if provided for authenticated requests
 /// - Any future standard headers required by the EVE Frontier API
 ///
 /// The interceptor runs before each request is sent, allowing for global
 /// request modification without duplicating header logic across services.
 class _RestRequestInterceptor implements Interceptor {
+  /// Optional bearer token for authenticated requests
+  final String? _bearerToken;
+
+  /// Creates an interceptor with optional authentication token
+  const _RestRequestInterceptor({String? bearerToken})
+      : _bearerToken = bearerToken;
+
   @override
   FutureOr<Response<BodyType>> intercept<BodyType>(
       Chain<BodyType> chain) async {
-    // Add standard JSON accept header to all requests
-    final request = applyHeaders(chain.request, {'accept': 'application/json'});
+    // Start with standard JSON accept header
+    final headers = <String, String>{'accept': 'application/json'};
+
+    // Add authorization header if bearer token is provided
+    if (_bearerToken != null && _bearerToken.isNotEmpty) {
+      headers['authorization'] = 'Bearer $_bearerToken';
+    }
+
+    // Add standard headers to the request
+    final request = applyHeaders(chain.request, headers);
 
     // Continue the request chain with modified headers
     return chain.proceed(request);

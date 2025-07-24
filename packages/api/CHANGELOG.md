@@ -1,3 +1,7 @@
+## 0.0.4-alpha
+
+- Implement World API v0.1.34
+
 ## 0.0.3-alpha
 
 - Add documentation

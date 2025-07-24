@@ -3,8 +3,7 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:built_value/iso_8601_duration_serializer.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:evefrontier_api/src/data/entities/v2/scan_entity.dart';
-
+import 'v2/scan_entity.dart';
 import 'models/address_config_entity.dart';
 import 'models/chain_config_entity.dart';
 import 'v2/fuel_entity.dart';
@@ -16,7 +15,6 @@ import 'v2/smart_character_entity.dart';
 import 'models/contracts_entity.dart';
 import 'models/item_type_ids_entity.dart';
 import 'v2/kill_mail_entity.dart';
-import 'models/loss_type_enum.dart';
 import 'models/native_currency_entity.dart';
 import 'models/rpc_entity.dart';
 import 'models/rpc_urls_entity.dart';
@@ -47,14 +45,11 @@ import 'v2/pagination_data_entity.dart';
 import 'v2/pagination_metadata_entry.dart';
 import 'v2/type_entity.dart';
 import 'v2/verify_response_entry.dart';
-
 export 'models/address_config_entity.dart';
 export 'models/chain_config_entity.dart';
 export 'v2/smart_character_entity.dart';
 export 'models/contracts_entity.dart';
 export 'models/item_type_ids_entity.dart';
-
-export 'models/loss_type_enum.dart';
 export 'models/native_currency_entity.dart';
 export 'models/rpc_entity.dart';
 export 'models/rpc_urls_entity.dart';
@@ -63,7 +58,6 @@ export 'routes/abi_cfg_entity.dart';
 export 'routes/abi_config_entity.dart';
 export 'routes/abi_entity.dart';
 export 'routes/eip_entity.dart';
-
 export 'routes/healthy_entity.dart';
 export 'routes/urls_entity.dart';
 export 'types/attribute_entity.dart';
@@ -81,9 +75,7 @@ export 'v2/solar_system_entity.dart';
 export 'pod/pod_entry.dart';
 export 'pod/pod_value_entry.dart';
 export 'pod/pod_value_type_enum.dart';
-
 export 'v1/erc_entity.dart';
-
 export 'v2/kill_mail_entity.dart';
 export 'v2/verify_response_entry.dart';
 export 'v2/pagination_metadata_entry.dart';
@@ -104,7 +96,6 @@ part 'entities.g.dart';
   ContractsEntity,
   ItemTypeIDsEntity,
   KillMailEntity,
-  LossTypeEnum,
   NativeCurrencyEntity,
   RpcEntity,
   RpcUrlsEntity,
@@ -154,5 +145,8 @@ final Serializers entitySerializers = (_$entitySerializers.toBuilder()
       ..add(PaginationDataEntitySerializer<SmartCharacterEntity>())
       ..add(PaginationDataEntitySerializer<SmartAssemblyEntity>())
       ..add(PaginationDataEntitySerializer<KillMailEntity>())
-      ..add(PaginationDataEntitySerializer<SolarSystemEntity>()))
+      ..add(PaginationDataEntitySerializer<SolarSystemEntity>())
+      ..add(PaginationDataEntitySerializer<JumpEntity>())
+      ..add(PaginationDataEntitySerializer<ScanEntity>())
+      ..add(PaginationDataEntitySerializer<FuelEntity>()))
     .build();

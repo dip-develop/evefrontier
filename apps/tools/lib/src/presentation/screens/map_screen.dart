@@ -1,7 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:evefrontier_api/evefrontier_api.dart';
-import 'package:evefrontier_tools/src/presentation/widgets/map_view_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/map_view_widget.dart';
 
 class MapScrean extends StatefulWidget {
   const MapScrean({super.key});

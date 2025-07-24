@@ -14,20 +14,34 @@ export 'src/data/entities/entities.dart';
 /// This class provides a simplified, high-level interface that abstracts the complexity
 /// of the underlying REST API implementation. It serves as a facade that delegates
 /// all operations to the appropriate repository implementation while providing
-/// additional features like configurable logging.
+/// additional features like configurable logging and authentication support.
 ///
 /// Key features:
 /// - Unified API surface for all EVE Frontier operations
+/// - Bearer token authentication for protected endpoints
 /// - Configurable logging system for debugging and monitoring
 /// - Clean separation between public interface and internal implementation
 /// - Type-safe method signatures with domain entities
 /// - Organized method grouping by functional area (Chain, Game, Meta)
 ///
+/// Authentication:
+/// Some API endpoints require authentication via bearer token. These include
+/// user-specific operations like jump history, scan data, and personal statistics.
+/// Public endpoints (kill mails, assemblies, types, etc.) work without authentication.
+///
 /// Usage example:
 /// ```dart
+/// // Public API access
 /// final api = EVEFrontierAPI(levelLog: Level.INFO);
 /// final health = await api.getHealth();
 /// final killMails = await api.getKillMails(limit: 10);
+///
+/// // Authenticated API access
+/// final authenticatedApi = EVEFrontierAPI(
+///   bearerToken: 'your-jwt-token',
+///   levelLog: Level.INFO,
+/// );
+/// final myJumps = await authenticatedApi.getJumps(limit: 10);
 /// ```
 ///
 /// The class automatically handles:
@@ -39,10 +53,11 @@ class EVEFrontierAPI {
   /// Internal repository instance that handles all REST API operations
   late final RestRepo _api;
 
-  /// Initializes the EVE Frontier API client with optional logging configuration.
+  /// Initializes the EVE Frontier API client with optional logging configuration and authentication.
   ///
   /// Sets up the complete API infrastructure including:
   /// - REST repository implementation with HTTP client
+  /// - Authentication token for protected endpoints
   /// - Logging system with configurable verbosity
   /// - Request/response processing pipeline
   ///
@@ -50,6 +65,9 @@ class EVEFrontierAPI {
   /// - [levelLog]: Optional logging level for debugging and monitoring.
   ///   Defaults to [Level.OFF] (no logging) for production use.
   ///   Use [Level.INFO] for general logging or [Level.ALL] for detailed debugging.
+  /// - [bearerToken]: Optional authentication token for accessing protected endpoints.
+  ///   Required for user-specific operations like jump history, scan data, and personal statistics.
+  ///   If not provided, only public endpoints will be accessible.
   ///
   /// The logging system outputs formatted messages including:
   /// - Log level (INFO, WARNING, SEVERE, etc.)
@@ -58,15 +76,21 @@ class EVEFrontierAPI {
   ///
   /// Example:
   /// ```dart
-  /// // Production (no logging)
+  /// // Production (no logging, public endpoints only)
   /// final api = EVEFrontierAPI();
   ///
   /// // Development with logging
   /// final api = EVEFrontierAPI(levelLog: Level.INFO);
+  ///
+  /// // Authenticated client for user-specific data
+  /// final api = EVEFrontierAPI(
+  ///   bearerToken: 'your-jwt-token-here',
+  ///   levelLog: Level.INFO,
+  /// );
   /// ```
-  EVEFrontierAPI({Level? levelLog}) {
+  EVEFrontierAPI({Level? levelLog, String? bearerToken}) {
     // Initialize the REST repository implementation
-    _api = RestRepoImpl();
+    _api = RestRepoImpl(bearerToken: bearerToken);
 
     // Configure logging system
     Logger.root.level = levelLog ?? Level.OFF;
