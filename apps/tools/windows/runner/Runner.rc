@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "evefrontier_tools" "\0"
+            VALUE "CompanyName", "DIP Dev" "\0"
+            VALUE "FileDescription", "EVE Frontier Tools" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "evefrontier_tools" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "InternalName", "EVE Frontier Tools" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 DIP Dev. All rights reserved." "\0"
             VALUE "OriginalFilename", "evefrontier_tools.exe" "\0"
-            VALUE "ProductName", "evefrontier_tools" "\0"
+            VALUE "ProductName", "EVE Frontier Tools" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

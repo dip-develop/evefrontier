@@ -1,6 +1,6 @@
 {
-    "name": "evefrontier_tools",
-    "short_name": "evefrontier_tools",
+    "name": "EVE Frontier Tools",
+    "short_name": "EVE Frontier Tools",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

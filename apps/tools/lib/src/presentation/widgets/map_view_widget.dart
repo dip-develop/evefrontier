@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:collection/collection.dart';
 import 'package:evefrontier_api/evefrontier_api.dart';
 import 'package:flutter/gestures.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
 class MapViewWidget extends StatefulWidget {
-  final BuiltList<SolarSystemEntity> solarSystems;
+  final List<SolarSystemEntity> solarSystems;
 
   const MapViewWidget({super.key, required this.solarSystems});
 
@@ -19,6 +18,8 @@ class _MapViewWidgetState extends State<MapViewWidget> {
   Vector3 rotation = Vector3.zero();
   double zoom = 5.0;
   Offset focalPoint = Offset.zero;
+  Offset panOffset = Offset.zero;
+  Offset _hoverPoint = Offset.zero;
 
   @override
   void didUpdateWidget(covariant MapViewWidget oldWidget) {
@@ -28,18 +29,36 @@ class _MapViewWidgetState extends State<MapViewWidget> {
     }
   }
 
+  void _onScaleStart(ScaleStartDetails details) {
+    setState(() {
+      focalPoint = details.focalPoint;
+    });
+  }
+
   void _onScaleUpdate(ScaleUpdateDetails details) {
     setState(() {
       rotation.y += details.focalPointDelta.dx * 0.01;
       rotation.x -= details.focalPointDelta.dy * 0.01;
-      zoom *= details.scale;
-      zoom = zoom.clamp(5, 400.0);
+      if (details.scale != 1.0) {
+        final oldZoom = zoom;
+        final Size screenSize =
+            (context.findRenderObject() as RenderBox?)?.size ?? Size.zero;
+        final Offset screenCenter =
+            Offset(screenSize.width / 2, screenSize.height / 2);
+        final Offset worldPos =
+            (focalPoint - panOffset - screenCenter) / oldZoom;
+        zoom *= details.scale;
+        zoom = zoom.clamp(5, 400.0);
+        final Offset newScreenPos = worldPos * zoom + panOffset + screenCenter;
+        panOffset += (focalPoint - newScreenPos) * 0.001;
+      }
     });
   }
 
   void _onPointerSignal(PointerSignalEvent event) {
     if (event is PointerScrollEvent) {
       setState(() {
+        focalPoint = event.position;
         zoom += event.scrollDelta.dy > 0 ? -1 : 1;
         zoom = zoom.clamp(5, 400.0);
       });
@@ -48,7 +67,7 @@ class _MapViewWidgetState extends State<MapViewWidget> {
 
   void _onHover(PointerHoverEvent event) {
     setState(() {
-      focalPoint = event.position;
+      _hoverPoint = event.position;
     });
   }
 
@@ -59,6 +78,7 @@ class _MapViewWidgetState extends State<MapViewWidget> {
       child: Listener(
         onPointerSignal: _onPointerSignal,
         child: GestureDetector(
+          onScaleStart: _onScaleStart,
           onScaleUpdate: _onScaleUpdate,
           child: CustomPaint(
             size: Size.infinite,
@@ -67,6 +87,7 @@ class _MapViewWidgetState extends State<MapViewWidget> {
               rotation: rotation,
               zoom: zoom,
               focalPoint: focalPoint,
+              panOffset: panOffset,
             ),
           ),
         ),
@@ -81,33 +102,33 @@ class _SolarSystemPainter extends CustomPainter {
   final Vector3 rotation;
   final double zoom;
   final Offset focalPoint;
+  final Offset panOffset;
 
   _SolarSystemPainter({
     required this.solarSystems,
     required this.rotation,
     required this.zoom,
     required this.focalPoint,
+    required this.panOffset,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     final screenCenter = Offset(size.width / 2, size.height / 2);
     final paint = Paint()..color = Colors.white;
-    /* canvas.drawRect(
-      Rect.fromLTRB(0, 0, size.width, size.height),
-      Paint()..color = Colors.black,
-    ); */
 
     final center = _calculateCenter(solarSystems);
 
     final matrix = Matrix4.identity()
-      ..translate(screenCenter.dx, screenCenter.dy, 500)
-      ..scale(zoom)
+      ..translateByVector3(Vector3(panOffset.dx, panOffset.dy, 0))
+      ..translateByVector3(Vector3(focalPoint.dx, focalPoint.dy, 0))
+      ..scaleByVector3(Vector3(zoom, zoom, zoom))
+      ..translateByVector3(Vector3(-focalPoint.dx, -focalPoint.dy, 0))
+      ..translateByVector3(Vector3(screenCenter.dx, screenCenter.dy, 500))
       ..rotateX(rotation.x)
       ..rotateY(rotation.y)
       ..setEntry(3, 2, 0.001)
-      /* ..translate(-focalPoint.dx, -focalPoint.dy) */
-      ..translate(-center.x * 1e-18, -center.y * 1e-18);
+      ..translateByVector3(Vector3(-center.x * 1e-18, -center.y * 1e-18, 0));
 
     for (var system in solarSystems) {
       final transformed = matrix.transformed3(
@@ -138,44 +159,28 @@ class _SolarSystemPainter extends CustomPainter {
       final starPosition = Offset(transformed.x, transformed.y);
       double distanceToCenter = (starPosition - screenCenter).distance;
 
-      // Определяем яркость: чем ближе к центру, тем ярче
       double brightnessFactor = (1.0 - (distanceToCenter / 500.0)).clamp(
         0.0,
         1.0,
       );
       Color starColor = Color.fromARGB(
-        (255 * brightnessFactor).toInt(), // Альфа-канал зависит от расстояния
+        (255 * brightnessFactor).toInt(),
         255,
         255,
         255,
       );
 
-      /* if (starColor.a < 0.3) continue; */
-
-      /* final starSize = (1.5 * distanceFactor).clamp(1.0, 5.0); */
-
-      /* if (starSize < 0.5) {
-        continue;
-      } */
-
-      /* if (starSize > 2) {
-        paint.shader = RadialGradient(
-          colors: [Colors.white, Colors.black],
-          stops: [0.2, 1.0],
-        ).createShader(
-          Rect.fromCircle( 
-            center: Offset(starPosition.dx, starPosition.dy),
-            radius: starSize,
-          ),
-        );
-      } */
+      final starRadius = zoom > 50.0 ? 1.0 * (zoom / 50.0) : 1.0;
 
       canvas.drawCircle(
         Offset(transformed.x, transformed.y),
-        1.0 /* starSize */,
+        starRadius,
         paint..color = starColor,
       );
-      /* _drawText(canvas, system.solarSystemName, starPosition, size); */
+      if (zoom > 200.0) {
+        _drawText(canvas, system.name,
+            starPosition.translate(0, starRadius * -3), size);
+      }
     }
   }
 
