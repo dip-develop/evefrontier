@@ -1,7 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'location_entity.dart';
+import '../entities.dart';
 
 part 'solar_system_entity.g.dart';
 

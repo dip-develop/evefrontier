@@ -169,9 +169,13 @@ abstract interface class RestRepo {
   /// Solar systems represent locations in the EVE Frontier universe where
   /// players can deploy assemblies and conduct activities.
   ///
+  /// Parameters:
+  /// - [limit]: Maximum number of solar systems to return (optional, max: 1000)
+  /// - [offset]: Number of solar systems to skip for pagination (optional)
+  ///
   /// Returns paginated collection of solar system entities with location data.
-  /// Supports up to 1000 systems per request.
-  Future<PaginationDataEntity<SolarSystemEntity>> getSolarSystems();
+  Future<PaginationDataEntity<SolarSystemEntity>> getSolarSystems(
+      {int? limit, int? offset});
 
   /// Retrieves detailed information about a specific solar system
   ///

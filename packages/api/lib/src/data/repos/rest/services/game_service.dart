@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
 
-import '../../../../../evefrontier_api.dart';
+import '../../../entities/entities.dart';
 
 part 'game_service.chopper.dart';
 
@@ -134,13 +134,16 @@ abstract class GameService extends ChopperService {
   /// - location: 3D coordinates (x, y, z)
   /// - name: Solar system name
   ///
-  /// Supports pagination through limit/offset query parameters (max limit: 1000).
+  /// Query Parameters:
+  /// - [limit]: Maximum number of solar systems to return (optional, max: 1000)
+  /// - [offset]: Number of solar systems to skip before collecting results (optional)
   ///
   /// HTTP Status Codes:
   /// - 200: Solar systems with metadata successfully retrieved
   /// - 400: Bad Request
   @GET(path: '/v2/solarsystems')
-  Future<Response<PaginationDataEntity<SolarSystemEntity>>> getSolarSystems();
+  Future<Response<PaginationDataEntity<SolarSystemEntity>>> getSolarSystems(
+      {@Query() int? limit, @Query() int? offset});
 
   /// Retrieves detailed information about a specific solar system
   ///

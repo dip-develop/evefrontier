@@ -5,6 +5,8 @@ homepage: https://dip.dev
 issue_tracker: https://github.com/dip-develop/evefrontier/issues
 repository: https://github.com/dip-develop/evefrontier
 
+resolution: workspace
+
 topics:
   - game
   - api

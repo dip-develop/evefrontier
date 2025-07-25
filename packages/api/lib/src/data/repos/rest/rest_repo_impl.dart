@@ -5,8 +5,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
 
-import '../../../../evefrontier_api.dart';
 import '../../../domain/interfaces/rest_repo.dart';
+import '../../entities/entities.dart';
 import 'services/chain_service.dart';
 import 'services/game_service.dart';
 import 'services/meta_service.dart';
@@ -146,8 +146,9 @@ class RestRepoImpl implements RestRepo {
   Future<ScanEntity> getScan(String id) => _game.getMeScan(id).then(_getData);
 
   @override
-  Future<PaginationDataEntity<SolarSystemEntity>> getSolarSystems() =>
-      _game.getSolarSystems().then(_getData);
+  Future<PaginationDataEntity<SolarSystemEntity>> getSolarSystems(
+          {int? limit, int? offset}) =>
+      _game.getSolarSystems(limit: limit, offset: offset).then(_getData);
 
   @override
   Future<SolarSystemEntity> getSolarSystem(String id) =>

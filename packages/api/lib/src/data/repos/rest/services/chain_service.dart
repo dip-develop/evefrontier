@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
 
-import '../../../../../evefrontier_api.dart';
+import '../../../entities/entities.dart';
 
 part 'chain_service.chopper.dart';
 

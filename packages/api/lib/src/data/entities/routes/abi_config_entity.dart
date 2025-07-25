@@ -2,8 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import '../models/system_ids_entity.dart';
-import 'abi_cfg_entity.dart';
+import '../entities.dart';
 
 part 'abi_config_entity.g.dart';
 

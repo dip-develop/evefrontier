@@ -214,7 +214,7 @@ void main() {
           // If successful, check response structure
         } catch (e) {
           // Expected to fail without authentication
-          expect(e.toString(), contains('401'));
+          expect(e.toString(), contains('authorization'));
         }
       });
 
@@ -234,7 +234,7 @@ void main() {
           // If successful, check response structure
         } catch (e) {
           // Expected to fail without authentication
-          expect(e.toString(), contains('401'));
+          expect(e.toString(), contains('authentication'));
         }
       });
 

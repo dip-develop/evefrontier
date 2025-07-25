@@ -1,11 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'contracts_entity.dart';
-import 'item_type_ids_entity.dart';
-import 'native_currency_entity.dart';
-import 'rpc_entity.dart';
-import 'system_ids_entity.dart';
+import '../entities.dart';
 
 part 'chain_config_entity.g.dart';
 

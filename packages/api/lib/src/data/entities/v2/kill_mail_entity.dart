@@ -1,7 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'smart_character_entity.dart';
+import '../entities.dart';
 
 part 'kill_mail_entity.g.dart';
 

@@ -98,12 +98,20 @@ final class _$GameService extends GameService {
   }
 
   @override
-  Future<Response<PaginationDataEntity<SolarSystemEntity>>> getSolarSystems() {
+  Future<Response<PaginationDataEntity<SolarSystemEntity>>> getSolarSystems({
+    int? limit,
+    int? offset,
+  }) {
     final Uri $url = Uri.parse('/v2/solarsystems');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'limit': limit,
+      'offset': offset,
+    };
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
+      parameters: $params,
     );
     return client.send<PaginationDataEntity<SolarSystemEntity>,
         SolarSystemEntity>($request);

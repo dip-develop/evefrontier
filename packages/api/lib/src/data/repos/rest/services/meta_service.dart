@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:chopper/chopper.dart';
 
-import '../../../../../evefrontier_api.dart';
+import '../../../entities/entities.dart';
 
 part 'meta_service.chopper.dart';
 
